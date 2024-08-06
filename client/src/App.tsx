@@ -17,7 +17,7 @@ const App: React.FC = () => {
       <Sidebar />
       <div className="w-full ml-[250px]">
         <Navbar />
-        <main>
+        <main className="p-5">
           <Routes>
             <Route path="add-student" element={<AddStudent />} />
             <Route path="student-list" element={<StudentList />} />
