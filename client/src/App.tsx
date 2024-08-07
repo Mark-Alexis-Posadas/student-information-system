@@ -10,12 +10,17 @@ import { DepartmentList } from "./pages/DepartmentList";
 import { CourseList } from "./pages/CourseList";
 import { UserList } from "./pages/UserList";
 import { Settings } from "./pages/Settings";
+import { useSelector } from "react-redux";
+
+//types
+import { IsToggleType } from "./types/states/isToggle";
 
 const App: React.FC = () => {
+  const isToggle = useSelector((state: IsToggleType) => state.toggle.isToggle);
   return (
     <div className="flex min-h-screen">
       <Sidebar />
-      <div className="w-full ml-[250px]">
+      <div className={`w-full ${!isToggle ? "ml-[250px]" : "ml-0"}`}>
         <Navbar />
         <main className="p-5">
           <Routes>
