@@ -1,6 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faCaretDown, faMoon } from "@fortawesome/free-solid-svg-icons";
+
 const Navbar: React.FC = () => {
   return (
     <nav className="bg-white p-3 px-4 montserrat border-b border-slate-300">
