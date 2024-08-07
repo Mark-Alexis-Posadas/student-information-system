@@ -1,11 +1,15 @@
 import React from "react";
-import { useSelector } from "react-redux";
+
 import { Link } from "react-router-dom";
 import { IsToggleType } from "../../types/states/isToggle";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faGears,
+  faPlus,
+  faUserGroup,
+} from "@fortawesome/free-solid-svg-icons";
 
-const Sidebar: React.FC = () => {
-  const isToggle = useSelector((state: IsToggleType) => state.toggle.isToggle);
-
+const Sidebar: React.FC<IsToggleType> = ({ isToggle }) => {
   return (
     <>
       {!isToggle && (
@@ -16,10 +20,16 @@ const Sidebar: React.FC = () => {
             </li>
             <h3 className="font-bold">Students</h3>
             <li>
-              <Link to="/add-student">New Student</Link>
+              <Link to="/add-student">
+                <FontAwesomeIcon icon={faPlus} />
+                New Student
+              </Link>
             </li>
             <li>
-              <Link to="/student-list">Student List</Link>
+              <Link to="/student-list">
+                <FontAwesomeIcon icon={faUserGroup} />
+                Student List
+              </Link>
             </li>
             <h3 className="font-bold">Maintenance</h3>
             <li>
@@ -32,7 +42,11 @@ const Sidebar: React.FC = () => {
               <Link to="user-list">User List</Link>
             </li>
             <li>
-              <Link to="settings">Settings</Link>
+              <Link to="settings">
+                {" "}
+                <FontAwesomeIcon icon={faGears} />
+                Settings
+              </Link>
             </li>
           </ul>
         </aside>

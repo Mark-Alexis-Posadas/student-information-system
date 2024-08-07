@@ -3,6 +3,7 @@ import { addStudentFormFieldsData } from "../../data/add-student";
 import { Input } from "../../components/Forms/Inputs";
 import { TextArea } from "../../components/TextArea";
 import { Select } from "../../components/Forms/Select";
+import { Button } from "../../components/Buttons";
 
 export const AddStudent: React.FC = () => {
   return (
@@ -36,6 +37,16 @@ export const AddStudent: React.FC = () => {
             )}
           </div>
         ))}
+        <div className="flex items-center gap-4">
+          <Button
+            text="Add Student"
+            classNames="text-white bg-blue-500 rounded p-2"
+          />
+          <Button
+            text="Cancel"
+            classNames="text-white bg-gray-300 rounded p-2"
+          />
+        </div>
       </form>
     </div>
   );

@@ -4,16 +4,13 @@ import {
   faBars,
   faCaretDown,
   faMoon,
+  faSun,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch, useSelector } from "react-redux";
 import { setIsToggle } from "../../reducers/toggleSlice";
 import { IsToggleType } from "../../types/states/isToggle";
 
-const Navbar: React.FC = () => {
-  const dispatch = useDispatch();
-  const isToggle = useSelector((state: IsToggleType) => state.toggle.isToggle);
-
+const Navbar: React.FC<IsToggleType> = ({ isToggle, dispatch }) => {
   return (
     <nav className="bg-white p-3 px-4 montserrat border-b border-slate-300">
       <ul className="flex items-center justify-between">
@@ -27,7 +24,9 @@ const Navbar: React.FC = () => {
           <img src="" alt="" />
 
           <span>Administrator admin</span>
-          <FontAwesomeIcon icon={faMoon} />
+          <button onClick={() => dispatch(setIsToggle())}>
+            <FontAwesomeIcon icon={isToggle ? faSun : faMoon} />
+          </button>
           <FontAwesomeIcon icon={faCaretDown} />
         </li>
       </ul>
