@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Sidebar: React.FC = () => {
   return (
-    <aside className="border-r-2 border-slate-200 fixed h-full w-[250px]">
+    <aside className="border-r-2 border-slate-200 fixed p-3 px-4 h-full w-[250px]">
       <ul>
         <li>
           <Link to="/"> Dashboard</Link>
