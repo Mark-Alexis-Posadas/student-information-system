@@ -13,6 +13,7 @@ import { DepartmentList } from "./pages/DepartmentList";
 import { CourseList } from "./pages/CourseList";
 import { UserList } from "./pages/UserList";
 import { Settings } from "./pages/Settings";
+import { Dashboard } from "./pages/Dashboard";
 
 const App: React.FC = () => {
   const isToggle = useAppSelector((state) => state.toggle.isToggle);
@@ -28,6 +29,7 @@ const App: React.FC = () => {
         />
         <main className="p-5">
           <Routes>
+            <Route path="/" element={<Dashboard />} />
             <Route path="add-student" element={<AddStudent />} />
             <Route path="student-list" element={<StudentList />} />
             <Route path="department-list" element={<DepartmentList />} />
