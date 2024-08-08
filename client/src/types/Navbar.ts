@@ -1,7 +1,7 @@
 import { Dispatch } from "redux";
-import { SidebarTypes } from "./Sidebar";
+import { InitialStateTypes } from "./InitialState";
 export interface NavbarTypes {
-  isToggle: SidebarTypes["isToggle"];
+  isToggle: InitialStateTypes["isToggle"];
   dispatch: Dispatch<any>;
   setIsToggle: () => void;
 }

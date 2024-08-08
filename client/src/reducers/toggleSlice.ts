@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-const initialState = {
+import { InitialStateTypes } from "../types/InitialState";
+const initialState: InitialStateTypes = {
   isToggle: false,
 };
 export const toggleSlice = createSlice({

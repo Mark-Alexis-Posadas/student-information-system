@@ -1,3 +1,4 @@
+import { InitialStateTypes } from "./InitialState";
 export interface SidebarTypes {
-  isToggle: boolean;
+  isToggle: InitialStateTypes["isToggle"];
 }
