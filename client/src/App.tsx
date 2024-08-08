@@ -18,14 +18,22 @@ import { Dashboard } from "./pages/Dashboard";
 const App: React.FC = () => {
   const isToggle = useAppSelector((state) => state.toggle.isToggle);
   const dispatch = useAppDispatch();
+
+  const handleToggleTheme = () => {
+    dispatch(setIsToggle());
+  };
+
+  const handleToggleSidebar = () => {
+    dispatch(setIsToggle());
+  };
   return (
     <div className="flex min-h-screen">
       <Sidebar isToggle={isToggle} />
       <div className={`w-full ${!isToggle ? "ml-[250px]" : "ml-0"}`}>
         <Navbar
           isToggle={isToggle}
-          dispatch={dispatch}
-          setIsToggle={setIsToggle}
+          handleToggleTheme={handleToggleTheme}
+          handleToggleSidebar={handleToggleSidebar}
         />
         <main className="p-5">
           <Routes>

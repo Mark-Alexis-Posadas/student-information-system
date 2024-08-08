@@ -1,5 +1,10 @@
 import React from "react";
+import { TableList } from "../../components/TableList";
 
 export const StudentList: React.FC = () => {
-  return <div>Student list page</div>;
+  return (
+    <div>
+      <TableList />
+    </div>
+  );
 };

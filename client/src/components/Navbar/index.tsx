@@ -10,12 +10,16 @@ import {
 
 import { NavbarTypes } from "../../types/Navbar";
 
-const Navbar: React.FC<NavbarTypes> = ({ isToggle, dispatch, setIsToggle }) => {
+const Navbar: React.FC<NavbarTypes> = ({
+  isToggle,
+  handleToggleTheme,
+  handleToggleSidebar,
+}) => {
   return (
     <nav className="bg-white p-3 px-4 montserrat border-b border-slate-300">
       <ul className="flex items-center justify-between">
         <li className="flex items-center gap-4">
-          <button onClick={() => dispatch(setIsToggle())}>
+          <button onClick={handleToggleSidebar}>
             <FontAwesomeIcon icon={isToggle ? faXmark : faBars} />
           </button>
           <h3 className="font-bold">Student information system - admin</h3>
@@ -24,7 +28,7 @@ const Navbar: React.FC<NavbarTypes> = ({ isToggle, dispatch, setIsToggle }) => {
           <img src="" alt="" />
 
           <span>Administrator admin</span>
-          <button onClick={() => dispatch(setIsToggle())}>
+          <button onClick={handleToggleTheme}>
             <FontAwesomeIcon icon={isToggle ? faSun : faMoon} />
           </button>
           <FontAwesomeIcon icon={faCaretDown} />
