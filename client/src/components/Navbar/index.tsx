@@ -7,10 +7,10 @@ import {
   faSun,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import { setIsToggle } from "../../reducers/toggleSlice";
+
 import { NavbarTypes } from "../../types/Navbar";
 
-const Navbar: React.FC<NavbarTypes> = ({ isToggle, dispatch }) => {
+const Navbar: React.FC<NavbarTypes> = ({ isToggle, dispatch, setIsToggle }) => {
   return (
     <nav className="bg-white p-3 px-4 montserrat border-b border-slate-300">
       <ul className="flex items-center justify-between">

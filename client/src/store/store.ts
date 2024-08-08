@@ -3,12 +3,10 @@ import toggleReducer from "../reducers/toggleSlice";
 
 const store = configureStore({
   reducer: {
-    toggle: toggleReducer, // The key here should be something meaningful, like "toggle"
+    toggle: toggleReducer,
   },
 });
 
-export type AppDispatch = typeof store.dispatch;
-
 export type RootState = ReturnType<typeof store.getState>;
-
+export type AppDispatch = typeof store.dispatch;
 export default store;

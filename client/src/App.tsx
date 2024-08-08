@@ -3,6 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 
+//reducers
+import { setIsToggle } from "./reducers/toggleSlice";
 //pages
 import { AddStudent } from "./pages/AddStudent";
 import { StudentList } from "./pages/StudentList";
@@ -22,7 +24,11 @@ const App: React.FC = () => {
     <div className="flex min-h-screen">
       <Sidebar isToggle={isToggle} />
       <div className={`w-full ${!isToggle ? "ml-[250px]" : "ml-0"}`}>
-        <Navbar isToggle={isToggle} dispatch={dispatch} />
+        <Navbar
+          isToggle={isToggle}
+          dispatch={dispatch}
+          setIsToggle={setIsToggle}
+        />
         <main className="p-5">
           <Routes>
             <Route path="add-student" element={<AddStudent />} />
