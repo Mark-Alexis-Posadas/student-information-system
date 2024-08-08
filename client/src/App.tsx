@@ -1,4 +1,5 @@
 import React from "react";
+import { useAppSelector, useAppDispatch } from "./hooks/hooks";
 import { Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
@@ -12,14 +13,10 @@ import { DepartmentList } from "./pages/DepartmentList";
 import { CourseList } from "./pages/CourseList";
 import { UserList } from "./pages/UserList";
 import { Settings } from "./pages/Settings";
-import { useDispatch, useSelector } from "react-redux";
-
-//types
-import { IsToggleType } from "./types/states/isToggle";
 
 const App: React.FC = () => {
-  const isToggle = useSelector((state: IsToggleType) => state.toggle.isToggle);
-  const dispatch = useDispatch();
+  const isToggle = useAppSelector((state) => state.toggle.isToggle);
+  const dispatch = useAppDispatch();
   return (
     <div className="flex min-h-screen">
       <Sidebar isToggle={isToggle} />
