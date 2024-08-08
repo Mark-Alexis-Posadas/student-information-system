@@ -1,15 +1,15 @@
 import React from "react";
 
 import { Link } from "react-router-dom";
-import { IsToggleType } from "../../types/states/isToggle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGears,
   faPlus,
   faUserGroup,
 } from "@fortawesome/free-solid-svg-icons";
+import { SidebarTypes } from "../../types/Sidebar";
 
-const Sidebar: React.FC<IsToggleType> = ({ isToggle }) => {
+const Sidebar: React.FC<SidebarTypes> = ({ isToggle }) => {
   return (
     <>
       {!isToggle && (

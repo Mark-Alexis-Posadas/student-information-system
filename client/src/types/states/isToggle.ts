@@ -1,3 +1,5 @@
 export interface IsToggleType {
-  isToggle: boolean;
+  toggle: {
+    isToggle: boolean;
+  };
 }
