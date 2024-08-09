@@ -7,7 +7,7 @@ import { Button } from "../../components/Buttons";
 
 export const AddStudent: React.FC = () => {
   return (
-    <div>
+    <div className="p-5 shadow-custom-shadow rounded">
       <h1>Student Details</h1>
       <form>
         {addStudentFormFieldsData.map((item, index) => (
