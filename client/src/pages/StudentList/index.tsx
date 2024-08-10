@@ -4,7 +4,7 @@ import { studentListsData } from "../../data/student-list";
 export const StudentList: React.FC = () => {
   return (
     <div>
-      <TableList studentListsData={studentListsData} />
+      <TableList tableHeadingData={studentListsData} />
     </div>
   );
 };

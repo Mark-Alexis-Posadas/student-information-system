@@ -4,7 +4,7 @@ import { Input } from "../Forms/Inputs";
 import { TableHead } from "../Table/TableHead";
 import { TableRow } from "../Table/TableRow";
 import { TableListProps } from "../../types/pages/student-list";
-export const TableList: React.FC<TableListProps> = ({ studentListsData }) => {
+export const TableList: React.FC<TableListProps> = ({ tableHeadingData }) => {
   return (
     <div className="rounded shadow-custom-shadow">
       <div className="flex items-center justify-between border-b border-slate-300 p-5">
@@ -41,7 +41,7 @@ export const TableList: React.FC<TableListProps> = ({ studentListsData }) => {
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50">
               <tr>
-                {studentListsData.map((item) => (
+                {tableHeadingData.map((item) => (
                   <TableHead item={item} key={item.id} />
                 ))}
               </tr>
