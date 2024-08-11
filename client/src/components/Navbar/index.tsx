@@ -9,22 +9,31 @@ import {
   faSun,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import { setIsToggle } from "../../reducers/toggleSlice";
+import {
+  setIsToggleSidebar,
+  setIsToggleTheme,
+} from "../../reducers/toggleSlice";
 
 const Navbar: React.FC = () => {
-  const isToggle = useAppSelector((state) => state.toggle.isToggle);
+  const isToggleTheme = useAppSelector((state) => state.toggle.isToggleTheme);
+  const isToggleSidebar = useAppSelector(
+    (state) => state.toggle.isToggleSidebar
+  );
   const dispatch = useAppDispatch();
 
-  const handleToggleClick = () => {
-    dispatch(setIsToggle());
+  const handleToggleSidebar = () => {
+    dispatch(setIsToggleSidebar());
+  };
+  const handleToggleTheme = () => {
+    dispatch(setIsToggleTheme());
   };
 
   return (
     <nav className="bg-white p-3 px-4 montserrat border-b border-slate-300">
       <ul className="flex items-center justify-between">
         <li className="flex items-center gap-4">
-          <button onClick={handleToggleClick}>
-            <FontAwesomeIcon icon={isToggle ? faXmark : faBars} />
+          <button onClick={handleToggleSidebar}>
+            <FontAwesomeIcon icon={isToggleSidebar ? faXmark : faBars} />
           </button>
           <h3 className="font-bold">Student information system - admin</h3>
         </li>
@@ -32,8 +41,8 @@ const Navbar: React.FC = () => {
           <img src="" alt="" />
 
           <span>Administrator admin</span>
-          <button onClick={handleToggleClick}>
-            <FontAwesomeIcon icon={isToggle ? faSun : faMoon} />
+          <button onClick={handleToggleTheme}>
+            <FontAwesomeIcon icon={isToggleTheme ? faSun : faMoon} />
           </button>
           <FontAwesomeIcon icon={faCaretDown} />
         </li>

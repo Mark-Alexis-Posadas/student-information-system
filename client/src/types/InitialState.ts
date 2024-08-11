@@ -1,3 +1,4 @@
 export interface InitialStateTypes {
-  isToggle: boolean;
+  isToggleSidebar: boolean;
+  isToggleTheme: boolean;
 }

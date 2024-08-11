@@ -1,18 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { InitialStateTypes } from "../types/InitialState";
 const initialState: InitialStateTypes = {
-  isToggle: false,
+  isToggleSidebar: false,
+  isToggleTheme: false,
 };
 export const toggleSlice = createSlice({
   name: "toggleSlice",
   initialState,
   reducers: {
-    setIsToggle: (state) => {
-      state.isToggle = !state.isToggle;
+    setIsToggleSidebar: (state) => {
+      state.isToggleSidebar = !state.isToggleSidebar;
+    },
+    setIsToggleTheme: (state) => {
+      state.isToggleTheme = !state.isToggleTheme;
     },
   },
 });
 
-export const { setIsToggle } = toggleSlice.actions;
+export const { setIsToggleSidebar, setIsToggleTheme } = toggleSlice.actions;
 
 export default toggleSlice.reducer;

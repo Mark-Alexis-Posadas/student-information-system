@@ -14,12 +14,14 @@ import { Settings } from "./pages/Settings";
 import { Dashboard } from "./pages/Dashboard";
 
 const App: React.FC = () => {
-  const isToggle = useAppSelector((state) => state.toggle.isToggle);
+  const isToggleSidebar = useAppSelector(
+    (state) => state.toggle.isToggleSidebar
+  );
 
   return (
     <div className="flex min-h-screen">
-      <Sidebar isToggle={isToggle} />
-      <div className={`w-full ${!isToggle ? "ml-[250px]" : "ml-0"}`}>
+      <Sidebar isToggle={isToggleSidebar} />
+      <div className={`w-full ${!isToggleSidebar ? "ml-[250px]" : "ml-0"}`}>
         <Navbar />
         <main className="p-5">
           <Routes>
