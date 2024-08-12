@@ -13,13 +13,13 @@ const Sidebar: React.FC<SidebarTypes> = ({ isToggle }) => {
   return (
     <>
       {!isToggle && (
-        <aside className="border-r border-slate-200 fixed p-3 px-4 h-full w-[250px]">
+        <aside className="border-r border-slate-200 fixed p-3 px-4 h-full w-[250px] dark:border-none dark:bg-gray-700">
           <h1 className="font-bold">logo</h1>
           <ul className="my-3">
             <li className="my-2 text-sm text-gray-500">
               <Link to="/">Dashboard</Link>
             </li>
-            <h3 className="font-bold my-3">Students</h3>
+            <h3 className="font-bold my-3 dark:text-white">Students</h3>
             <li className="my-2 text-sm text-gray-500">
               <Link className="flex items-center gap-2" to="/add-student">
                 <FontAwesomeIcon icon={faPlus} />
@@ -32,7 +32,7 @@ const Sidebar: React.FC<SidebarTypes> = ({ isToggle }) => {
                 Student List
               </Link>
             </li>
-            <h3 className="font-bold my-3">Maintenance</h3>
+            <h3 className="font-bold my-3 dark:text-white">Maintenance</h3>
             <li className="my-2 text-sm text-gray-500">
               <Link className="flex items-center gap-2" to="department-list">
                 Department List

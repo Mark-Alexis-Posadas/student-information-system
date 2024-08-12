@@ -4,11 +4,12 @@ import { Input } from "../../components/Forms/Inputs";
 import { TextArea } from "../../components/TextArea";
 import { Select } from "../../components/Forms/Select";
 import { Button } from "../../components/Buttons";
+import { PageTitle } from "../../components/PageTitle";
 
 export const AddStudent: React.FC = () => {
   return (
     <div className="p-5 shadow-custom-shadow rounded">
-      <h1>Student Details</h1>
+      <PageTitle text="Student Details" />
       <form>
         {addStudentFormFieldsData.map((item, index) => (
           <div key={item.id}>

@@ -7,7 +7,7 @@ export const TextArea: React.FC<TextAreaTypes> = ({ placeholder }) => {
       name=""
       id=""
       placeholder={placeholder}
-      className="border border-slate-300 rounded p-2"
+      className="border border-slate-300 rounded p-2 dark:bg-gray-700 dark:border-none"
     ></textarea>
   );
 };
