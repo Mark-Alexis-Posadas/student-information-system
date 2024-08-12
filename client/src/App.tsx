@@ -21,7 +21,11 @@ const App: React.FC = () => {
   return (
     <div className="flex min-h-screen">
       <Sidebar isToggle={isToggleSidebar} />
-      <div className={`w-full ${!isToggleSidebar ? "ml-[250px]" : "ml-0"}`}>
+      <div
+        className={`dark:bg-black dark:text-white  w-full ${
+          !isToggleSidebar ? "ml-[250px]" : "ml-0"
+        }`}
+      >
         <Navbar />
         <main className="p-5">
           <Routes>

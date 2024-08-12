@@ -26,18 +26,21 @@ const Navbar: React.FC = () => {
   };
   const handleToggleTheme = () => {
     dispatch(setIsToggleTheme());
+    document.body.classList.toggle("dark");
   };
 
   return (
-    <nav className="bg-white p-3 px-4 montserrat border-b border-slate-300">
+    <nav className="bg-white dark:bg-black p-3 px-4 montserrat border-b border-slate-300 dark:border-gray-600">
       <ul className="flex items-center justify-between">
-        <li className="flex items-center gap-4">
+        <li className="flex items-center gap-4 dark:text-white">
           <button onClick={handleToggleSidebar}>
             <FontAwesomeIcon icon={isToggleSidebar ? faXmark : faBars} />
           </button>
-          <h3 className="font-bold">Student information system - admin</h3>
+          <h3 className="font-bold dark:text-white">
+            Student information system - admin
+          </h3>
         </li>
-        <li className="flex items-center gap-3">
+        <li className="flex items-center gap-3 dark:text-white">
           <img src="" alt="" />
 
           <span>Administrator admin</span>
