@@ -5,6 +5,7 @@ export const Input: React.FC<InputTypes> = ({
   name,
   id,
   placeholder,
+  customClass,
 }) => {
   return (
     <input
@@ -12,7 +13,7 @@ export const Input: React.FC<InputTypes> = ({
       name={name}
       id={id}
       placeholder={placeholder}
-      className="border border-slate-300 p-2 rounded text-gray-500"
+      className={`${customClass} border border-slate-300 p-2 rounded text-gray-500`}
     />
   );
 };

@@ -3,7 +3,8 @@ import { Button } from "../Buttons";
 import { Input } from "../Forms/Inputs";
 import { TableHead } from "../Table/TableHead";
 import { TableRow } from "../Table/TableRow";
-import { TableListProps } from "../../types/pages/student-list";
+import { TableListProps } from "../../types/Table";
+
 export const TableList: React.FC<TableListProps> = ({ tableHeadingData }) => {
   return (
     <div className="rounded shadow-custom-shadow">
@@ -17,17 +18,24 @@ export const TableList: React.FC<TableListProps> = ({ tableHeadingData }) => {
       <div className="p-5">
         <div className="flex items-center justify-between my-3">
           <div>
-            <label htmlFor="">Show</label>
+            <label className="text-sm mx-3" htmlFor="">
+              Show
+            </label>
             <Input
               id="show_entries"
               placeholder="1"
               type="number"
               name="showEntries"
+              customClass="w-[50px]"
             />
-            <label htmlFor="">Entries</label>
+            <label className="text-sm mx-3" htmlFor="">
+              Entries
+            </label>
           </div>
           <div>
-            <label htmlFor="">Search</label>
+            <label className="text-sm mx-3" htmlFor="">
+              Search
+            </label>
             <Input
               id="search"
               placeholder="Search.."

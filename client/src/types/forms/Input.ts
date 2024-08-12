@@ -3,6 +3,7 @@ export interface InputTypes {
   id: string;
   name: string;
   placeholder: string;
+  customClass?: string;
 }
 
 export interface AddStudentDataTypes {
