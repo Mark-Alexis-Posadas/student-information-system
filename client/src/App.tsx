@@ -13,12 +13,14 @@ import AuthenticationLayout from "./AuthenticationLayout";
 import { SignUp } from "./authentication/SignUp";
 import { Login } from "./authentication/Login";
 import DashboardLayout from "./DashboardLayout";
+import { Otp } from "./authentication/Otp";
 
 const App: React.FC = () => {
   return (
     <Routes>
       <Route element={<AuthenticationLayout />}>
         <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/otp" element={<Otp />} />
         <Route path="/login" element={<Login />} />
       </Route>
 

@@ -1,4 +1,5 @@
 export interface ButtonTypes {
-  text: string;
+  text?: string;
   classNames: string;
+  children?: React.ReactNode;
 }

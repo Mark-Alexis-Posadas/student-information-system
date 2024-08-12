@@ -7,7 +7,7 @@ import { TableListProps } from "../../types/Table";
 
 export const TableList: React.FC<TableListProps> = ({ tableHeadingData }) => {
   return (
-    <div className="rounded shadow-custom-shadow">
+    <div className="rounded shadow-custom-shadow dark:bg-[#1f1f1f]">
       <div className="flex items-center justify-between border-b border-slate-300 p-5">
         <h1 className="font-bold">List of students</h1>
         <Button
@@ -59,6 +59,9 @@ export const TableList: React.FC<TableListProps> = ({ tableHeadingData }) => {
             </tbody>
           </table>
         </div>
+      </div>
+      <div className="flex items-center justify-betwee">
+        <span>Show </span>
       </div>
     </div>
   );

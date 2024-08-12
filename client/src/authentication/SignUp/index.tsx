@@ -4,6 +4,7 @@ import { Button } from "../../components/Buttons";
 import { PageTitle } from "../../components/PageTitle";
 import { Select } from "../../components/Forms/Select";
 import { Input } from "../../components/Forms/Inputs";
+import { Link } from "react-router-dom";
 export const SignUp: React.FC = () => {
   return (
     <div className="p-5 rounded shadow-custom-shadow">
@@ -35,10 +36,9 @@ export const SignUp: React.FC = () => {
             </div>
           )
         )}
-        <Button
-          classNames="text-white rounded bg-blue-500 p-2"
-          text="Sign Up"
-        />
+        <Button classNames="text-white rounded bg-blue-500 p-2">
+          <Link to="/otp">Sign Up</Link>
+        </Button>
       </form>
     </div>
   );
