@@ -3,14 +3,15 @@ import { signUpData } from "../../data/sign-up";
 import { Button } from "../../components/Buttons";
 import { PageTitle } from "../../components/PageTitle";
 import { Select } from "../../components/Forms/Select";
+import { Input } from "../../components/Forms/Inputs";
 export const SignUp: React.FC = () => {
   return (
-    <>
+    <div className="p-5 rounded shadow-custom-shadow">
       <PageTitle text="Create your account" />
       <form>
         {signUpData.map((item, index) =>
           index === 4 ? (
-            <div className="flex flex-col mb-3">
+            <div className="flex flex-col mb-3" key={item.id}>
               <label htmlFor="" className="text-sm capitalize">
                 {item.text}
               </label>
@@ -19,7 +20,7 @@ export const SignUp: React.FC = () => {
           ) : (
             <div key={item.id} className="flex flex-col mb-3">
               <label className="text-sm capitalize">{item.text}</label>
-              <input
+              <Input
                 type={
                   index === 3
                     ? "email"
@@ -27,8 +28,9 @@ export const SignUp: React.FC = () => {
                     ? "password"
                     : "text"
                 }
+                id={item.text.replace(/\s/g, "").toLowerCase()}
                 placeholder={item.text}
-                className="border border-slate-300 p-2 rounded"
+                name={item.text.replace(/\s/g, "").toLowerCase()}
               />
             </div>
           )
@@ -38,6 +40,6 @@ export const SignUp: React.FC = () => {
           text="Sign Up"
         />
       </form>
-    </>
+    </div>
   );
 };
