@@ -5,7 +5,7 @@ import { PageTitle } from "../../components/PageTitle";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { handleFields, handleSubmit } from "../../reducers/signUpSlice";
-
+import { SignUpFieldsTypes } from "../../types/authentication/sign-up";
 export const SignUp: React.FC = () => {
   const dispatch = useAppDispatch();
   const allValues = useAppSelector((state) => state.formFields.submittedValues);
@@ -14,7 +14,9 @@ export const SignUp: React.FC = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    dispatch(handleFields({ fieldName: name, value }));
+    dispatch(
+      handleFields({ fieldName: name as keyof SignUpFieldsTypes, value })
+    );
   };
 
   const handleSubmitValues = (e: React.FormEvent<HTMLFormElement>) => {
