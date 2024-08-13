@@ -14,6 +14,7 @@ const initialState: SignUpState = {
     password: "",
     confirmPassword: "",
   },
+  submittedValues: [],
 };
 
 const signUpSlice = createSlice({
@@ -24,8 +25,21 @@ const signUpSlice = createSlice({
       const { fieldName, value } = action.payload;
       state.formFields[fieldName] = value;
     },
+
+    handleSubmit: (state) => {
+      state.submittedValues.push(state.formFields);
+      state.formFields = {
+        firstName: "",
+        middleName: "",
+        lastName: "",
+        email: "",
+        gender: "",
+        password: "",
+        confirmPassword: "",
+      };
+    },
   },
 });
 
-export const { handleFields } = signUpSlice.actions;
+export const { handleFields, handleSubmit } = signUpSlice.actions;
 export default signUpSlice.reducer;

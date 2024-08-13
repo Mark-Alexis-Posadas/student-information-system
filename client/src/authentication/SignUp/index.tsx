@@ -4,10 +4,11 @@ import { Button } from "../../components/Buttons";
 import { PageTitle } from "../../components/PageTitle";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { handleFields } from "../../reducers/signUpSlice";
+import { handleFields, handleSubmit } from "../../reducers/signUpSlice";
 
 export const SignUp: React.FC = () => {
   const dispatch = useAppDispatch();
+  const allValues = useAppSelector((state) => state.formFields.submittedValues);
   const formFields = useAppSelector((state) => state.formFields.formFields);
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -16,10 +17,27 @@ export const SignUp: React.FC = () => {
     dispatch(handleFields({ fieldName: name, value }));
   };
 
+  const handleSubmitValues = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(handleSubmit());
+  };
+
   return (
     <div className="p-5 rounded shadow-custom-shadow">
       <PageTitle text="Create your account" />
-      <form>
+      {allValues.map((val) => (
+        <>
+          <h1>{val.firstName}</h1>
+          <h1>{val.middleName}</h1>
+          <h1>{val.lastName}</h1>
+          <h1>{val.email}</h1>
+          <h1>{val.gender}</h1>
+          <h1>{val.password}</h1>
+          <h1>{val.confirmPassword}</h1>
+        </>
+      ))}
+
+      <form onSubmit={handleSubmitValues}>
         <div className="flex flex-col mb-3">
           <label htmlFor="">First Name</label>
           <input
@@ -99,9 +117,7 @@ export const SignUp: React.FC = () => {
             placeholder="Confirm Password"
           />
         </div>
-        <Button classNames="text-white rounded bg-blue-500 p-2">
-          <Link to="/otp">Sign Up</Link>
-        </Button>
+        <Button classNames="text-white rounded bg-blue-500 p-2">submit</Button>
       </form>
     </div>
   );

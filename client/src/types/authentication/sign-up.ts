@@ -13,6 +13,7 @@ export interface SignUpFieldsTypes {
 
 export interface SignUpState {
   formFields: SignUpFieldsTypes;
+  submittedValues: SignUpFieldsTypes[];
 }
 
 export interface HandleFieldsPayload {
