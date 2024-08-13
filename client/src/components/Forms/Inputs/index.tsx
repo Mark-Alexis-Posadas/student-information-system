@@ -6,9 +6,11 @@ export const Input: React.FC<InputTypes> = ({
   id,
   placeholder,
   customClass,
+  value,
 }) => {
   return (
     <input
+      value={value}
       type={type}
       name={name}
       id={id}

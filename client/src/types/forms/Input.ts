@@ -1,4 +1,5 @@
 export interface InputTypes {
+  value: any;
   type: string;
   id: string;
   name: string;

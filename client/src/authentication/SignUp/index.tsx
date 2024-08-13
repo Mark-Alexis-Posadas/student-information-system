@@ -5,7 +5,10 @@ import { PageTitle } from "../../components/PageTitle";
 import { Select } from "../../components/Forms/Select";
 import { Input } from "../../components/Forms/Inputs";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 export const SignUp: React.FC = () => {
+  const dispatch = useAppDispatch;
+  const formFields = useAppSelector((state) => state.formFields.formFields);
   return (
     <div className="p-5 rounded shadow-custom-shadow">
       <PageTitle text="Create your account" />
