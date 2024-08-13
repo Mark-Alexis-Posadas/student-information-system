@@ -7,9 +7,11 @@ export const Input: React.FC<InputTypes> = ({
   placeholder,
   customClass,
   value,
+  handleChange,
 }) => {
   return (
     <input
+      onChange={handleChange}
       value={value}
       type={type}
       name={name}

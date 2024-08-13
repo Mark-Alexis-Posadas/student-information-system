@@ -1,5 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { HandleFieldsPayload, SignUpState } from "../types/forms/FormFields";
+import {
+  HandleFieldsPayload,
+  SignUpState,
+} from "../types/authentication/sign-up";
 
 const initialState: SignUpState = {
   formFields: {

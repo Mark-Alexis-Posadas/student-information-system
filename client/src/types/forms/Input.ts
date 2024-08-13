@@ -5,6 +5,7 @@ export interface InputTypes {
   name: string;
   placeholder: string;
   customClass?: string;
+  handleChange: () => void;
 }
 
 export interface AddStudentDataTypes {
