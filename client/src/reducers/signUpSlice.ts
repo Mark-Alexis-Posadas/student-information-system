@@ -14,6 +14,7 @@ const initialState: SignUpState = {
     password: "",
     confirmPassword: "",
   },
+
   submittedValues: [],
 };
 

@@ -8,7 +8,7 @@ import { PageTitle } from "../../components/PageTitle";
 
 export const AddStudent: React.FC = () => {
   return (
-    <div className="p-5 shadow-custom-shadow rounded">
+    <div className="p-5 shadow-custom-shadow rounded dark:bg-[#1f1f1f]">
       <PageTitle text="Student Details" />
       <form>
         {addStudentFormFieldsData.map((item, index) => (

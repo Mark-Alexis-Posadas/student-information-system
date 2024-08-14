@@ -13,7 +13,7 @@ const Sidebar: React.FC<SidebarTypes> = ({ isToggle }) => {
   return (
     <>
       {!isToggle && (
-        <aside className="border-r border-slate-200 fixed p-3 px-4 h-full w-[250px] dark:border-none dark:bg-gray-700">
+        <aside className="border-r border-slate-200 fixed p-3 px-4 h-full w-[250px] dark:border-none dark:bg-[#1f1f1f]">
           <h1 className="font-bold">logo</h1>
           <ul className="my-3">
             <li className="my-2 text-sm text-gray-500">

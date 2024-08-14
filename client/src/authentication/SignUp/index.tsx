@@ -1,15 +1,54 @@
-import React from "react";
-
+import React, { useState } from "react";
 import { Button } from "../../components/Buttons";
 import { PageTitle } from "../../components/PageTitle";
-import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { handleFields, handleSubmit } from "../../reducers/signUpSlice";
 import { SignUpFieldsTypes } from "../../types/authentication/sign-up";
+import { Alert } from "../../components/Alert";
+
 export const SignUp: React.FC = () => {
   const dispatch = useAppDispatch();
   const allValues = useAppSelector((state) => state.formFields.submittedValues);
   const formFields = useAppSelector((state) => state.formFields.formFields);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [showError, setShowError] = useState<boolean>(false);
+
+  const validateName = (name: string) => /^[A-Za-z\-'\s]+$/.test(name);
+
+  const validateFields = () => {
+    const newErrors: { [key: string]: string } = {};
+    setShowError(false);
+
+    if (
+      !validateName(formFields.firstName) ||
+      formFields.firstName.length < 1
+    ) {
+      newErrors.firstName =
+        "First name is required and should only contain letters, hyphens, or apostrophes.";
+    }
+
+    if (
+      formFields.middleName &&
+      (!validateName(formFields.middleName) || formFields.middleName.length < 1)
+    ) {
+      newErrors.middleName =
+        "Middle name should only contain letters, hyphens, or apostrophes.";
+    }
+
+    if (!validateName(formFields.lastName) || formFields.lastName.length < 1) {
+      newErrors.lastName =
+        "Last name is required and should only contain letters, hyphens, or apostrophes.";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      setShowError(true);
+      return false;
+    }
+
+    return true;
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -21,14 +60,24 @@ export const SignUp: React.FC = () => {
 
   const handleSubmitValues = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(handleSubmit());
+    if (validateFields()) {
+      dispatch(handleSubmit());
+    }
   };
 
   return (
     <div className="p-5 rounded shadow-custom-shadow">
+      {showError && (
+        <div className="mb-4">
+          {Object.values(errors).map((error, index) => (
+            <Alert key={index} text={error} classNames="text-red-800" />
+          ))}
+        </div>
+      )}
+
       <PageTitle text="Create your account" />
       {allValues.map((val) => (
-        <>
+        <div key={val.email}>
           <h1>{val.firstName}</h1>
           <h1>{val.middleName}</h1>
           <h1>{val.lastName}</h1>
@@ -36,61 +85,61 @@ export const SignUp: React.FC = () => {
           <h1>{val.gender}</h1>
           <h1>{val.password}</h1>
           <h1>{val.confirmPassword}</h1>
-        </>
+        </div>
       ))}
 
       <form onSubmit={handleSubmitValues}>
         <div className="flex flex-col mb-3">
-          <label htmlFor="">First Name</label>
+          <label htmlFor="firstName">First Name</label>
           <input
             onChange={handleChange}
             value={formFields.firstName}
             name="firstName"
             type="text"
             className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
-            placeholder="first name"
+            placeholder="First name"
           />
         </div>
         <div className="flex flex-col mb-3">
-          <label htmlFor="">Middle Name</label>
+          <label htmlFor="middleName">Middle Name</label>
           <input
             onChange={handleChange}
             value={formFields.middleName}
             name="middleName"
             type="text"
             className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
-            placeholder="middle name"
+            placeholder="Middle name"
           />
         </div>
         <div className="flex flex-col mb-3">
-          <label htmlFor="">Last Name</label>
+          <label htmlFor="lastName">Last Name</label>
           <input
             onChange={handleChange}
             value={formFields.lastName}
             name="lastName"
             type="text"
             className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
-            placeholder="last name"
+            placeholder="Last name"
           />
         </div>
         <div className="flex flex-col mb-3">
-          <label htmlFor="">Email</label>
+          <label htmlFor="email">Email</label>
           <input
             onChange={handleChange}
             value={formFields.email}
             name="email"
             type="email"
             className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
-            placeholder="email"
+            placeholder="Email"
           />
         </div>
         <div className="flex flex-col mb-3">
-          <label htmlFor="">Gender</label>
+          <label htmlFor="gender">Gender</label>
           <select
             onChange={handleChange}
             value={formFields.gender}
             name="gender"
-            id=""
+            id="gender"
             className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
           >
             <option value="female">Female</option>
@@ -98,7 +147,7 @@ export const SignUp: React.FC = () => {
           </select>
         </div>
         <div className="flex flex-col mb-3">
-          <label htmlFor="">Password</label>
+          <label htmlFor="password">Password</label>
           <input
             onChange={handleChange}
             value={formFields.password}
@@ -109,7 +158,7 @@ export const SignUp: React.FC = () => {
           />
         </div>
         <div className="flex flex-col mb-3">
-          <label htmlFor="">Confirm Password</label>
+          <label htmlFor="confirmPassword">Confirm Password</label>
           <input
             onChange={handleChange}
             value={formFields.confirmPassword}
@@ -119,7 +168,7 @@ export const SignUp: React.FC = () => {
             placeholder="Confirm Password"
           />
         </div>
-        <Button classNames="text-white rounded bg-blue-500 p-2">submit</Button>
+        <Button classNames="text-white rounded bg-blue-500 p-2">Submit</Button>
       </form>
     </div>
   );
