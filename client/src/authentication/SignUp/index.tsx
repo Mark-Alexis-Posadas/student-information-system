@@ -15,6 +15,10 @@ export const SignUp: React.FC = () => {
 
   const validateName = (name: string) => /^[A-Za-z\-'\s]+$/.test(name);
 
+  const validatePassword = (password: string) => {
+    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password);
+  };
+
   const validateFields = () => {
     const newErrors: { [key: string]: string } = {};
     setShowError(false);
@@ -38,6 +42,19 @@ export const SignUp: React.FC = () => {
     if (!validateName(formFields.lastName) || formFields.lastName.length < 1) {
       newErrors.lastName =
         "Last name is required and should only contain letters, hyphens, or apostrophes.";
+    }
+
+    if (!/\S+@\S+\.\S+/.test(formFields.email)) {
+      newErrors.email = "A valid email address is required.";
+    }
+
+    if (!validatePassword(formFields.password)) {
+      newErrors.password =
+        "Password must be at least 8 characters long, with at least one uppercase letter, one lowercase letter, and one number.";
+    }
+
+    if (formFields.password !== formFields.confirmPassword) {
+      newErrors.confirmPassword = "Passwords must match.";
     }
 
     if (Object.keys(newErrors).length > 0) {
