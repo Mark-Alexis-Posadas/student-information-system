@@ -1,11 +1,11 @@
 export interface InputTypes {
-  value: any;
+  value: string;
   type: string;
   id: string;
   name: string;
   placeholder: string;
   customClass?: string;
-  handleChange: () => void;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface AddStudentDataTypes {

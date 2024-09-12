@@ -1,12 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { addStudentFormFieldsData } from "../../data/add-student";
 import { Input } from "../../components/Forms/Inputs";
 import { TextArea } from "../../components/TextArea";
 import { Select } from "../../components/Forms/Select";
 import { Button } from "../../components/Buttons";
 import { PageTitle } from "../../components/PageTitle";
-
+import { ChangeEvent } from "../../types/Events";
+interface FormValues {
+  studentRoll: string;
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  gender: string;
+  dateOfBirth: string;
+  contact: string;
+  presentAddress: string;
+  permanentAddress: string;
+  [key: string]: string;
+}
+const intitialValues: FormValues = {
+  studentRoll: "",
+  firstName: "",
+  middleName: "",
+  lastName: "",
+  gender: "",
+  dateOfBirth: "",
+  contact: "",
+  presentAddress: "",
+  permanentAddress: "",
+};
 export const AddStudent: React.FC = () => {
+  const [values, setValues] = useState(intitialValues);
+  const handleInputChange = (e: ChangeEvent) => {
+    const { name, value } = e.target;
+    setValues((prev) => ({ ...prev, [name]: value }));
+  };
   return (
     <div className="p-5 shadow-custom-shadow rounded dark:bg-[#1f1f1f]">
       <PageTitle text="Student Details" />
@@ -28,6 +56,8 @@ export const AddStudent: React.FC = () => {
                 <label className="capitalize text-sm">{item.text}</label>
                 {item.type && (
                   <Input
+                    value={values[item.name]}
+                    handleChange={handleInputChange}
                     id={item.id}
                     name={item.name}
                     placeholder={item.text}
