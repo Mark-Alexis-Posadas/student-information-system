@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
-import { useAppSelector } from "./hooks/hooks";
+
 const DashboardLayout: React.FC = () => {
-  const isToggleSidebar = useAppSelector(
-    (state) => state.toggle.isToggleSidebar
-  );
+  const [isToggleSidebar, setIsToggleSidebar] = useState<boolean>(false);
+  const [isToggleTheme, setIsToggleTheme] = useState<boolean>(false);
+
+  const handleToggleSidebar = () => {
+    setIsToggleSidebar(!isToggleSidebar);
+  };
+
+  const handleToggleTheme = () => {
+    setIsToggleTheme(!isToggleTheme);
+    document.body.classList.toggle("dark");
+  };
 
   return (
     <div className="flex min-h-screen">
@@ -16,7 +24,12 @@ const DashboardLayout: React.FC = () => {
           !isToggleSidebar ? "ml-[250px]" : "ml-0"
         }`}
       >
-        <Navbar />
+        <Navbar
+          isToggle={isToggleSidebar}
+          isToggleTheme={isToggleTheme}
+          handleToggleSidebar={handleToggleSidebar}
+          handleToggleTheme={handleToggleTheme}
+        />
         <main className="p-5">
           <Outlet />
         </main>

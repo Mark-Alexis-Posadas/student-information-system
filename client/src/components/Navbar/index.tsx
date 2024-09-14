@@ -1,5 +1,4 @@
 import React from "react";
-import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,32 +8,21 @@ import {
   faSun,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import {
-  setIsToggleSidebar,
-  setIsToggleTheme,
-} from "../../reducers/toggleSlice";
 
-const Navbar: React.FC = () => {
-  const isToggleTheme = useAppSelector((state) => state.toggle.isToggleTheme);
-  const isToggleSidebar = useAppSelector(
-    (state) => state.toggle.isToggleSidebar
-  );
-  const dispatch = useAppDispatch();
+import { NavbarTypes } from "../../types/Navbar";
 
-  const handleToggleSidebar = () => {
-    dispatch(setIsToggleSidebar());
-  };
-  const handleToggleTheme = () => {
-    dispatch(setIsToggleTheme());
-    document.body.classList.toggle("dark");
-  };
-
+const Navbar: React.FC<NavbarTypes> = ({
+  isToggle,
+  isToggleTheme,
+  handleToggleSidebar,
+  handleToggleTheme,
+}) => {
   return (
     <nav className="bg-white dark:bg-black p-3 px-4 montserrat border-b border-slate-300 dark:border-gray-600">
       <ul className="flex items-center justify-between">
         <li className="flex items-center gap-4 dark:text-white">
           <button onClick={handleToggleSidebar}>
-            <FontAwesomeIcon icon={isToggleSidebar ? faXmark : faBars} />
+            <FontAwesomeIcon icon={isToggle ? faXmark : faBars} />
           </button>
           <h3 className="font-bold dark:text-white">
             Student information system - admin
