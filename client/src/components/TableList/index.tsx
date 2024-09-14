@@ -4,16 +4,20 @@ import { Input } from "../Forms/Inputs";
 import { TableHead } from "../Table/TableHead";
 import { TableRow } from "../Table/TableRow";
 import { TableListProps } from "../../types/Table";
+import { Link } from "react-router-dom";
 
 export const TableList: React.FC<TableListProps> = ({ tableHeadingData }) => {
   return (
     <div className="rounded shadow-custom-shadow dark:bg-[#1f1f1f]">
       <div className="flex items-center justify-between border-b border-slate-300 p-5">
         <h1 className="font-bold">List of students</h1>
-        <Button
-          text="Add new student"
-          classNames="text-white bg-blue-500 p-2 rounded"
-        />
+        <Link to="/add-student">
+          <Button
+            type="button"
+            text="Add new student"
+            classNames="text-white bg-blue-500 p-2 rounded"
+          />
+        </Link>
       </div>
       <div className="p-5">
         <div className="flex items-center justify-between my-3">

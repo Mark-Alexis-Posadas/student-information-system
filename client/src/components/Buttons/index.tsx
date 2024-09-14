@@ -5,6 +5,11 @@ export const Button: React.FC<ButtonTypes> = ({
   classNames,
   text,
   children,
+  type,
 }) => {
-  return <button className={classNames}>{text || children}</button>;
+  return (
+    <button type={type} className={classNames}>
+      {text || children}
+    </button>
+  );
 };

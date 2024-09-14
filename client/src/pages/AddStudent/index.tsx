@@ -5,13 +5,37 @@ import { TextArea } from "../../components/TextArea";
 import { Select } from "../../components/Forms/Select";
 import { Button } from "../../components/Buttons";
 import { PageTitle } from "../../components/PageTitle";
-import { ChangeEvent } from "../../types/Events";
+import { ChangeEvent, FormEvent } from "../../types/Events";
+import { FormValues } from "../../types/pages/add-student";
+
+const intialFormValues = {
+  studentRoll: "",
+  firstName: "",
+  middleName: "",
+  lastName: "",
+  gender: "",
+  dateOfBirth: "",
+  contact: "",
+  presentAddress: "",
+  permanentAddress: "",
+};
 
 export const AddStudent: React.FC = () => {
+  const [formValues, setFormValues] = useState<FormValues>(intialFormValues);
+
+  const handleInputChange = (e: ChangeEvent) => {
+    const { value, name } = e.target;
+    setFormValues((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFormSubmit = (e: FormEvent) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="p-5 shadow-custom-shadow rounded dark:bg-[#1f1f1f]">
       <PageTitle text="Student Details" />
-      <form>
+      <form onSubmit={handleFormSubmit}>
         {addStudentFormFieldsData.map((item, index) => (
           <div key={item.id}>
             {index === 4 ? (
@@ -29,7 +53,7 @@ export const AddStudent: React.FC = () => {
                 <label className="capitalize text-sm">{item.text}</label>
                 {item.type && (
                   <Input
-                    value={values[item.name]}
+                    value={formValues[item.name]}
                     handleChange={handleInputChange}
                     id={item.id}
                     name={item.name}
@@ -43,10 +67,12 @@ export const AddStudent: React.FC = () => {
         ))}
         <div className="flex items-center gap-4">
           <Button
+            type="submit"
             text="Add Student"
             classNames="text-white bg-blue-500 rounded p-2"
           />
           <Button
+            type="button"
             text="Cancel"
             classNames="text-white bg-gray-300 rounded p-2"
           />
