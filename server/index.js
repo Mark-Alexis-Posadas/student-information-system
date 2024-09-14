@@ -1,15 +1,29 @@
+require("dotenv").config();
+
 const express = require("express");
+const mongoose = require("mongoose");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 const app = express();
-const PORT = 8080;
-
+const routes = require("./routes/route");
 app.use(express.json());
+
+// Middleware
 app.use(cors());
+app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
-  res.send("Root page");
-});
+//routes
+app.use("/api/students", routes);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on PORT ${PORT}...`);
-});
+//connect to db
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    //port
+    app.listen(process.env.PORT, () => {
+      console.log("connected to db & listening of port", process.env.PORT);
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
