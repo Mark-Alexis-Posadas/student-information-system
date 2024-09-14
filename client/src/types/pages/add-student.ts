@@ -8,5 +8,6 @@ export interface FormValues {
   contact: string;
   presentAddress: string;
   permanentAddress: string;
+  email: string;
   [key: string]: string;
 }

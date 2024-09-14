@@ -7,6 +7,7 @@ import { Button } from "../../components/Buttons";
 import { PageTitle } from "../../components/PageTitle";
 import { ChangeEvent, FormEvent } from "../../types/Events";
 import { FormValues } from "../../types/pages/add-student";
+import axios from "axios";
 
 const intialFormValues = {
   studentRoll: "",
@@ -18,18 +19,41 @@ const intialFormValues = {
   contact: "",
   presentAddress: "",
   permanentAddress: "",
+  email: "",
 };
 
 export const AddStudent: React.FC = () => {
   const [formValues, setFormValues] = useState<FormValues>(intialFormValues);
+  const [students, setStudents] = useState<string[]>([]);
 
   const handleInputChange = (e: ChangeEvent) => {
     const { value, name } = e.target;
     setFormValues((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFormSubmit = (e: FormEvent) => {
+  const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    try {
+      const studentData = {
+        studentRoll: formValues.studentRoll,
+        firstName: formValues.firstName,
+        middleName: formValues.middleName,
+        lastName: formValues.lastName,
+        gender: formValues.gender,
+        dateOfBirth: formValues.dateOfBirth,
+        contact: formValues.contact,
+        presentAddress: formValues.presentAddress,
+        permanentAddress: formValues.permanentAddress,
+        email: formValues.email,
+      };
+      const response = await axios.post(
+        "http://localhost:4000/api/students/create-student",
+        studentData
+      );
+      setStudents((prev) => [...prev, response.data]);
+    } catch (error: any) {
+      console.log(error.message);
+    }
   };
 
   return (

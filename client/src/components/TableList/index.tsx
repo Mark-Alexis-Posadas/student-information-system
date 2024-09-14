@@ -6,7 +6,10 @@ import { TableRow } from "../Table/TableRow";
 import { TableListProps } from "../../types/Table";
 import { Link } from "react-router-dom";
 
-export const TableList: React.FC<TableListProps> = ({ tableHeadingData }) => {
+export const TableList: React.FC<TableListProps> = ({
+  tableHeadingData,
+  students,
+}) => {
   return (
     <div className="rounded shadow-custom-shadow dark:bg-[#1f1f1f]">
       <div className="flex items-center justify-between border-b border-slate-300 p-5">
@@ -59,7 +62,7 @@ export const TableList: React.FC<TableListProps> = ({ tableHeadingData }) => {
               </tr>
             </thead>
             <tbody>
-              <TableRow />
+              <TableRow students={students} />
             </tbody>
           </table>
         </div>
