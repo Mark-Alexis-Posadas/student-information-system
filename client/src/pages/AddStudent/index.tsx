@@ -65,19 +65,29 @@ export const AddStudent: React.FC = () => {
             {index === 4 ? (
               <div className="flex flex-col mb-3">
                 <label className="capitalize text-sm">{item.text}</label>
-                <Select />
+                <Select
+                  name={item.name}
+                  value={formValues[item.name as keyof FormValues]}
+                  onChange={handleInputChange}
+                />
               </div>
             ) : index === 7 || index === 8 ? (
               <div className="flex flex-col mb-3">
                 <label className="capitalize text-sm">{item.text}</label>
-                <TextArea placeholder={item.text} />
+                <TextArea
+                  name={item.name}
+                  value={formValues[item.name as keyof FormValues]}
+                  placeholder={item.text}
+                  onChange={handleInputChange}
+                  placeholder={item.text}
+                />
               </div>
             ) : (
               <div className="flex flex-col mb-3">
                 <label className="capitalize text-sm">{item.text}</label>
                 {item.type && (
                   <Input
-                    value={formValues[item.name]}
+                    value={formValues[item.name as keyof FormValues]}
                     handleChange={handleInputChange}
                     id={item.id}
                     name={item.name}
