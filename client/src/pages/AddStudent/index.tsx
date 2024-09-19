@@ -22,7 +22,12 @@ export const AddStudent: React.FC = () => {
   const [formValues, setFormValues] = useState<FormValues>(intialFormValues);
   const [students, setStudents] = useState<string[]>([]);
 
-  const handleInputChange = (e: ChangeEvent) => {
+  const handleInputChange = (
+    e:
+      | ChangeEvent
+      | React.ChangeEvent<HTMLSelectElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     const { value, name } = e.target;
     setFormValues((prev) => ({ ...prev, [name]: value }));
   };

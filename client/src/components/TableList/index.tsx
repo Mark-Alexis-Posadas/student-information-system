@@ -17,7 +17,7 @@ export const TableList: React.FC<TableListProps> = ({
     setStudent(e.target.value);
   };
 
-  const handleGenderChange = (e: ChangeEvent) => {
+  const handleGenderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setGender(e.target.value);
   };
 
