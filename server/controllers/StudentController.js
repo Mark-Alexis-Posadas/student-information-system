@@ -11,6 +11,7 @@ const getAllStudent = async (req, res) => {
 const createStudent = async (req, res) => {
   const {
     studentRoll,
+    email,
     firstName,
     middleName,
     lastName,
@@ -19,11 +20,11 @@ const createStudent = async (req, res) => {
     contact,
     presentAddress,
     permanentAddress,
-    email,
   } = req.body;
   try {
     const student = Student.create({
       studentRoll,
+      email,
       firstName,
       middleName,
       lastName,
@@ -32,7 +33,6 @@ const createStudent = async (req, res) => {
       contact,
       presentAddress,
       permanentAddress,
-      email,
     });
     res.status(201).json(student);
   } catch (error) {

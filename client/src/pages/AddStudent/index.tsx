@@ -91,10 +91,10 @@ export const AddStudent: React.FC = () => {
           <label className="capitalize text-sm">First name</label>
           <input
             onChange={handleInputChange}
-            value={formValues.studentRoll}
+            value={formValues.firstName}
             type="text"
-            name="studentRoll"
-            id="student_roll"
+            name="firstName"
+            id="first_name"
             placeholder="student roll"
             className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
           />
@@ -103,10 +103,10 @@ export const AddStudent: React.FC = () => {
           <label className="capitalize text-sm">Middle name</label>
           <input
             onChange={handleInputChange}
-            value={formValues.studentRoll}
+            value={formValues.middleName}
             type="text"
-            name="studentRoll"
-            id="student_roll"
+            name="middleName"
+            id="middle_name"
             placeholder="student roll"
             className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
           />
@@ -115,10 +115,10 @@ export const AddStudent: React.FC = () => {
           <label className="capitalize text-sm">Last name</label>
           <input
             onChange={handleInputChange}
-            value={formValues.studentRoll}
+            value={formValues.lastName}
             type="text"
-            name="studentRoll"
-            id="student_roll"
+            name="lastName"
+            id="last_name"
             placeholder="student roll"
             className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
           />
@@ -154,8 +154,8 @@ export const AddStudent: React.FC = () => {
             onChange={handleInputChange}
             value={formValues.contact}
             type="tel"
-            name="studentRoll"
-            id="student_roll"
+            name="contact"
+            id="contact"
             placeholder="student roll"
             className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
           />

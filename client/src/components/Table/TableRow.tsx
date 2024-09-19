@@ -10,6 +10,7 @@ export const TableRow: React.FC<StudentItemTypes> = ({ students }) => {
           key={item._id}
         >
           <td className="border p-2">{item.studentRoll}</td>
+          <td className="border p-2">{item.email}</td>
           <td className="border p-2">{item.firstName}</td>
           <td className="border p-2">{item.middleName}</td>
           <td className="border p-2">{item.lastName}</td>
@@ -18,7 +19,16 @@ export const TableRow: React.FC<StudentItemTypes> = ({ students }) => {
           <td className="border p-2">{item.contact}</td>
           <td className="border p-2">{item.presentAddress}</td>
           <td className="border p-2">{item.permanentAddress}</td>
-          <td className="border p-2">{item.email}</td>
+          <td className="border p-2">
+            <div className="flex items-center gap-3">
+              <button className="text-white p-2 rounded bg-blue-600">
+                Edit
+              </button>
+              <button className="text-white p-2 rounded bg-red-600">
+                Delete
+              </button>
+            </div>
+          </td>
         </tr>
       ))}
     </>
