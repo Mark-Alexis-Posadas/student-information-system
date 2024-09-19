@@ -4,6 +4,7 @@ export interface StudentListTypes {
 }
 
 export interface Student {
+  _id: string;
   studentRoll: string;
   firstName: string;
   middleName: string;
@@ -14,4 +15,8 @@ export interface Student {
   presentAddress: string;
   permanentAddress: string;
   email: string;
+}
+
+export interface StudentItemTypes {
+  students: Student[];
 }

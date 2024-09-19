@@ -1,10 +1,10 @@
 import React from "react";
-import { Student } from "../../types/pages/student-list";
+import { StudentItemTypes } from "../../types/pages/student-list";
 
-export const TableRow: React.FC<Student> = ({ students }) => {
+export const TableRow: React.FC<StudentItemTypes> = ({ students }) => {
   return (
     <>
-      {students.map((item, index) => (
+      {students.map((item) => (
         <tr
           className="odd:bg-white even:bg-gray-50 border-b dark:bg-gray-800 dark:border-gray-700"
           key={item._id}

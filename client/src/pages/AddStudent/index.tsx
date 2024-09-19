@@ -1,8 +1,4 @@
 import React, { useState } from "react";
-import { addStudentFormFieldsData } from "../../data/add-student";
-import { Input } from "../../components/Forms/Inputs";
-import { TextArea } from "../../components/TextArea";
-import { Select } from "../../components/Forms/Select";
 import { Button } from "../../components/Buttons";
 import { PageTitle } from "../../components/PageTitle";
 import { ChangeEvent, FormEvent } from "../../types/Events";
@@ -60,45 +56,125 @@ export const AddStudent: React.FC = () => {
     <div className="p-5 shadow-custom-shadow rounded dark:bg-[#1f1f1f]">
       <PageTitle text="Student Details" />
       <form onSubmit={handleFormSubmit}>
-        {addStudentFormFieldsData.map((item, index) => (
-          <div key={item.id}>
-            {index === 4 ? (
-              <div className="flex flex-col mb-3">
-                <label className="capitalize text-sm">{item.text}</label>
-                <Select
-                  name={item.name}
-                  value={formValues[item.name as keyof FormValues]}
-                  onChange={handleInputChange}
-                />
-              </div>
-            ) : index === 7 || index === 8 ? (
-              <div className="flex flex-col mb-3">
-                <label className="capitalize text-sm">{item.text}</label>
-                <TextArea
-                  name={item.name}
-                  value={formValues[item.name as keyof FormValues]}
-                  placeholder={item.text}
-                  onChange={handleInputChange}
-                  placeholder={item.text}
-                />
-              </div>
-            ) : (
-              <div className="flex flex-col mb-3">
-                <label className="capitalize text-sm">{item.text}</label>
-                {item.type && (
-                  <Input
-                    value={formValues[item.name as keyof FormValues]}
-                    handleChange={handleInputChange}
-                    id={item.id}
-                    name={item.name}
-                    placeholder={item.text}
-                    type={item.type}
-                  />
-                )}
-              </div>
-            )}
-          </div>
-        ))}
+        <div className="flex flex-col mb-3">
+          <label className="capitalize text-sm">Studet Roll</label>
+          <input
+            onChange={handleInputChange}
+            value={formValues.studentRoll}
+            type="text"
+            name="studentRoll"
+            id="student_roll"
+            placeholder="student roll"
+            className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
+          />
+        </div>
+
+        <div className="flex flex-col mb-3">
+          <label className="capitalize text-sm">Email</label>
+          <input
+            onChange={handleInputChange}
+            value={formValues.email}
+            type="email"
+            name="email"
+            id="email"
+            placeholder="email"
+            className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
+          />
+        </div>
+
+        <div className="flex flex-col mb-3">
+          <label className="capitalize text-sm">First name</label>
+          <input
+            onChange={handleInputChange}
+            value={formValues.studentRoll}
+            type="text"
+            name="studentRoll"
+            id="student_roll"
+            placeholder="student roll"
+            className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
+          />
+        </div>
+        <div className="flex flex-col mb-3">
+          <label className="capitalize text-sm">Middle name</label>
+          <input
+            onChange={handleInputChange}
+            value={formValues.studentRoll}
+            type="text"
+            name="studentRoll"
+            id="student_roll"
+            placeholder="student roll"
+            className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
+          />
+        </div>
+        <div className="flex flex-col mb-3">
+          <label className="capitalize text-sm">Last name</label>
+          <input
+            onChange={handleInputChange}
+            value={formValues.studentRoll}
+            type="text"
+            name="studentRoll"
+            id="student_roll"
+            placeholder="student roll"
+            className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
+          />
+        </div>
+        <div className="flex flex-col mb-3">
+          <label className="capitalize text-sm">Gender</label>
+          <select
+            value={formValues.gender}
+            name="gender"
+            id="gender"
+            onChange={handleInputChange}
+            className="border border-slate-300 p-2 rounded dark:bg-gray-700 dark:border-none"
+          >
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+        <div className="flex flex-col mb-3">
+          <label className="capitalize text-sm">Date of Birth</label>
+          <input
+            onChange={handleInputChange}
+            value={formValues.dateOfBirth}
+            type="date"
+            name="studentRoll"
+            id="student_roll"
+            placeholder="student roll"
+            className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
+          />
+        </div>
+        <div className="flex flex-col mb-3">
+          <label className="capitalize text-sm">Contact</label>
+          <input
+            onChange={handleInputChange}
+            value={formValues.contact}
+            type="tel"
+            name="studentRoll"
+            id="student_roll"
+            placeholder="student roll"
+            className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
+          />
+        </div>
+        <div className="flex flex-col mb-3">
+          <label className="capitalize text-sm">Present address</label>
+          <textarea
+            onChange={handleInputChange}
+            name="presentAddress"
+            id="present_address"
+            placeholder="Present address"
+            className="border border-slate-300 rounded p-2 dark:bg-gray-700 dark:border-none"
+          ></textarea>
+        </div>
+        <div className="flex flex-col mb-3">
+          <label className="capitalize text-sm">Permanent address</label>
+          <textarea
+            onChange={handleInputChange}
+            name="permanentAddress"
+            id="permanent_address"
+            placeholder="Permanent address"
+            className="border border-slate-300 rounded p-2 dark:bg-gray-700 dark:border-none"
+          ></textarea>
+        </div>
         <div className="flex items-center gap-4">
           <Button
             type="submit"

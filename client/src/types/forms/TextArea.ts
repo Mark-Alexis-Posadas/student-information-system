@@ -4,6 +4,6 @@ export interface TextAreaTypes {
   name: InputTypes["name"];
   id: InputTypes["id"];
   handleChange: InputTypes["handleChange"];
-  type: InputTypes["type"];
+  type?: InputTypes["type"];
   value: InputTypes["value"];
 }
