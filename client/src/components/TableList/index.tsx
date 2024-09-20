@@ -4,7 +4,14 @@ import { Button } from "../Buttons";
 import { TableListProps } from "../../types/Table";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faVenus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEdit,
+  faEye,
+  faPlus,
+  faSearch,
+  faTrash,
+  faVenus,
+} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 export const TableList: React.FC<TableListProps> = ({
@@ -29,9 +36,11 @@ export const TableList: React.FC<TableListProps> = ({
         <Link to="/add-student">
           <Button
             type="button"
-            text="Add new student"
-            classNames="text-white bg-blue-600 p-2 rounded"
-          />
+            classNames="flex items-center gap-2 text-white bg-blue-600 p-2 rounded"
+          >
+            <FontAwesomeIcon icon={faPlus} />
+            Add new student
+          </Button>
         </Link>
       </div>
       <div className="p-5">
@@ -66,11 +75,13 @@ export const TableList: React.FC<TableListProps> = ({
               </select>
             </div>
             <Button
-              classNames="text-white bg-blue-600 p-2 rounded w-[100px]"
+              classNames="flex items-center gap-2 text-white bg-blue-600 p-2 rounded w-[100px]"
               type="submit"
-              text="Search"
               handleButtonClick={handleSearchSubmit}
-            />
+            >
+              <FontAwesomeIcon icon={faSearch} />
+              Search
+            </Button>
           </form>
         </div>
 
@@ -119,16 +130,30 @@ export const TableList: React.FC<TableListProps> = ({
                     <td className="border p-2">
                       <div className="flex items-center gap-3">
                         <Link to="/add-student">
-                          <button
-                            className="text-white p-2 rounded bg-blue-600"
-                            onClick={() => handleEdit(item._id)}
+                          <Button
+                            classNames="flex items-center gap-2 text-white p-2 rounded bg-blue-600"
+                            type="button"
                           >
+                            <FontAwesomeIcon icon={faEdit} />
                             Edit
-                          </button>
+                          </Button>
                         </Link>
-                        <button className="text-white p-2 rounded bg-red-600">
+
+                        <Button
+                          classNames="flex items-center gap-2 text-white p-2 rounded bg-gray-500"
+                          type="button"
+                        >
+                          <FontAwesomeIcon icon={faEye} />
+                          View
+                        </Button>
+
+                        <Button
+                          classNames="flex items-center gap-2 text-white p-2 rounded bg-red-600"
+                          type="button"
+                        >
+                          <FontAwesomeIcon icon={faTrash} />
                           Delete
-                        </button>
+                        </Button>
                       </div>
                     </td>
                   </tr>
