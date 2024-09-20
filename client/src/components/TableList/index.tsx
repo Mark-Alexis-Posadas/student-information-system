@@ -13,6 +13,8 @@ import {
   faVenus,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { ViewModal } from "../Modal/ViewModal";
+import { useState } from "react";
 
 export const TableList: React.FC<TableListProps> = ({
   loading,
@@ -23,11 +25,19 @@ export const TableList: React.FC<TableListProps> = ({
   handleGenderChange,
   handleSearchSubmit,
 }) => {
-  const handleEdit = async (id: string) => {
-    const response = await axios.get(
-      `http://localhost:4000/api/students/get-single-student/${id}`
-    );
-    console.log(response.data);
+  const [view, setView] = useState([]);
+  const [isToggleView, setIsToggleView] = useState(false);
+  const handleViewStudent = async (id: string) => {
+    setIsToggleView(true);
+    try {
+      const response = await axios.get(
+        `http://localhost:4000/api/students/get-single-student/${id}`
+      );
+      console.log(response.data);
+      setView(response.data);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
   return (
     <div className="rounded shadow-custom-shadow dark:bg-[#1f1f1f]">
@@ -142,6 +152,7 @@ export const TableList: React.FC<TableListProps> = ({
                         <Button
                           classNames="flex items-center gap-2 text-white p-2 rounded bg-gray-500"
                           type="button"
+                          handleButtonClick={() => handleViewStudent(item._id)}
                         >
                           <FontAwesomeIcon icon={faEye} />
                           View
@@ -166,6 +177,9 @@ export const TableList: React.FC<TableListProps> = ({
       <div className="flex items-center justify-betwee">
         <span>Show </span>
       </div>
+      {isToggleView && (
+        <ViewModal view={view} setIsToggleView={setIsToggleView} />
+      )}
     </div>
   );
 };
