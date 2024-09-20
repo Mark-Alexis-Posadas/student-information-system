@@ -33,8 +33,8 @@ export const TableList: React.FC<TableListProps> = ({ students }) => {
         </Link>
       </div>
       <div className="p-5">
-        <div className="flex items-center justify-center w-full mb-5">
-          <div className="flex justify-between gap-3 items-center my-3 bg-slate-50  dark:bg-gray-700 rounded shadow-md p-3 w-[900px]">
+        <div className="flex items-center justify-center lg:justify-start w-full mb-5">
+          <div className="flex flex-col md:flex-row justify-between gap-3 items-center my-3 bg-slate-50  dark:bg-gray-700 rounded shadow-md p-3 w-[900px]">
             <div className="flex items-center gap-3 w-full">
               <FontAwesomeIcon icon={faSearch} />
               <input

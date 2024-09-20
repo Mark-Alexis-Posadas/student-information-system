@@ -4,9 +4,11 @@ import { PageTitle } from "../../components/PageTitle";
 import { ChangeEvent, FormEvent } from "../../types/Events";
 import { FormValues } from "../../types/pages/add-student";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const intialFormValues = {
   studentRoll: "",
+  email: "",
   firstName: "",
   middleName: "",
   lastName: "",
@@ -15,12 +17,12 @@ const intialFormValues = {
   contact: "",
   presentAddress: "",
   permanentAddress: "",
-  email: "",
 };
 
 export const AddStudent: React.FC = () => {
   const [formValues, setFormValues] = useState<FormValues>(intialFormValues);
-  const [students, setStudents] = useState<string[]>([]);
+  // const [students, setStudents] = useState<string[]>([]);
+  const navigate = useNavigate();
 
   const handleInputChange = (
     e:
@@ -37,6 +39,7 @@ export const AddStudent: React.FC = () => {
     try {
       const studentData = {
         studentRoll: formValues.studentRoll,
+        email: formValues.email,
         firstName: formValues.firstName,
         middleName: formValues.middleName,
         lastName: formValues.lastName,
@@ -45,13 +48,13 @@ export const AddStudent: React.FC = () => {
         contact: formValues.contact,
         presentAddress: formValues.presentAddress,
         permanentAddress: formValues.permanentAddress,
-        email: formValues.email,
       };
-      const response = await axios.post(
+      await axios.post(
         "http://localhost:4000/api/students/create-student",
         studentData
       );
-      setStudents((prev) => [...prev, response.data]);
+      navigate("/student-list");
+      // setStudents((prev) => [...prev, response.data]);
     } catch (error: any) {
       console.log(error.message);
     }
