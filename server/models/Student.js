@@ -25,10 +25,11 @@ const studentSchema = new Schema({
   },
   gender: {
     type: String,
+    enum: ["male", "female", "other"],
     required: true,
   },
   dateOfBirth: {
-    type: String,
+    type: Date,
     required: true,
   },
   contact: {

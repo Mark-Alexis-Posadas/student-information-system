@@ -6,9 +6,10 @@ export const Button: React.FC<ButtonTypes> = ({
   text,
   children,
   type,
+  handleButtonClick,
 }) => {
   return (
-    <button type={type} className={classNames}>
+    <button type={type} className={classNames} onClick={handleButtonClick}>
       {text || children}
     </button>
   );

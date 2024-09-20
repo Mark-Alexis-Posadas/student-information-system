@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import moment from "moment";
 import { Button } from "../../components/Buttons";
 import { PageTitle } from "../../components/PageTitle";
 import { ChangeEvent, FormEvent } from "../../types/Events";
@@ -22,7 +23,7 @@ const intialFormValues = {
 export const AddStudent: React.FC = () => {
   const [formValues, setFormValues] = useState<FormValues>(intialFormValues);
   // const [students, setStudents] = useState<string[]>([]);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleInputChange = (
     e:
@@ -31,7 +32,12 @@ export const AddStudent: React.FC = () => {
       | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     const { value, name } = e.target;
-    setFormValues((prev) => ({ ...prev, [name]: value }));
+    if (name === "dateOfBirth") {
+      const newDate = moment(new Date(e.target.value)).format("YYYY-MM-DD");
+      setFormValues(newDate);
+    } else {
+      setFormValues((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleFormSubmit = async (e: FormEvent) => {
@@ -49,11 +55,12 @@ export const AddStudent: React.FC = () => {
         presentAddress: formValues.presentAddress,
         permanentAddress: formValues.permanentAddress,
       };
-      await axios.post(
+      const response = await axios.post(
         "http://localhost:4000/api/students/create-student",
         studentData
       );
-      navigate("/student-list");
+      // navigate("/student-list");
+      console.log(response.data);
       // setStudents((prev) => [...prev, response.data]);
     } catch (error: any) {
       console.log(error.message);
@@ -67,6 +74,7 @@ export const AddStudent: React.FC = () => {
         <div className="flex flex-col mb-3">
           <label className="capitalize text-sm">Studet Roll</label>
           <input
+            autoComplete="on"
             onChange={handleInputChange}
             value={formValues.studentRoll}
             type="text"
@@ -98,7 +106,7 @@ export const AddStudent: React.FC = () => {
             type="text"
             name="firstName"
             id="first_name"
-            placeholder="student roll"
+            placeholder="first name"
             className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
           />
         </div>
@@ -110,7 +118,7 @@ export const AddStudent: React.FC = () => {
             type="text"
             name="middleName"
             id="middle_name"
-            placeholder="student roll"
+            placeholder="middle name"
             className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
           />
         </div>
@@ -122,7 +130,7 @@ export const AddStudent: React.FC = () => {
             type="text"
             name="lastName"
             id="last_name"
-            placeholder="student roll"
+            placeholder="last name"
             className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
           />
         </div>
@@ -145,9 +153,9 @@ export const AddStudent: React.FC = () => {
             onChange={handleInputChange}
             value={formValues.dateOfBirth}
             type="date"
-            name="studentRoll"
-            id="student_roll"
-            placeholder="student roll"
+            name="dateOfBirth"
+            id="date_of_birth"
+            placeholder="date of birth"
             className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
           />
         </div>
@@ -159,7 +167,7 @@ export const AddStudent: React.FC = () => {
             type="tel"
             name="contact"
             id="contact"
-            placeholder="student roll"
+            placeholder="contact"
             className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
           />
         </div>
@@ -169,7 +177,7 @@ export const AddStudent: React.FC = () => {
             onChange={handleInputChange}
             name="presentAddress"
             id="present_address"
-            placeholder="Present address"
+            placeholder="present address"
             className="border border-slate-300 rounded p-2 dark:bg-gray-700 dark:border-none"
           ></textarea>
         </div>
@@ -179,7 +187,7 @@ export const AddStudent: React.FC = () => {
             onChange={handleInputChange}
             name="permanentAddress"
             id="permanent_address"
-            placeholder="Permanent address"
+            placeholder="permanent address"
             className="border border-slate-300 rounded p-2 dark:bg-gray-700 dark:border-none"
           ></textarea>
         </div>
