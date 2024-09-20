@@ -40,4 +40,14 @@ const createStudent = async (req, res) => {
   }
 };
 
-module.exports = { getAllStudent, createStudent };
+const getSingleStudent = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const student = await Student.findById(id);
+    res.json(student);
+  } catch (error) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+module.exports = { getAllStudent, createStudent, getSingleStudent };

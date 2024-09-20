@@ -38,7 +38,12 @@ export const StudentList: React.FC = () => {
 
   const handleSearchSubmit = (e: OnSubmitEvent) => {
     e.preventDefault();
+    if (!student) {
+      alert("please fill out search filed");
+      return;
+    }
     setLoading(true);
+
     setTimeout(() => {
       const filtered = students.filter((item) => {
         const matchesStudent =

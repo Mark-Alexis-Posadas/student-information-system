@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 import { Button } from "../Buttons";
 
 import { TableListProps } from "../../types/Table";
-import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faVenus } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 export const TableList: React.FC<TableListProps> = ({
   loading,
@@ -15,6 +16,12 @@ export const TableList: React.FC<TableListProps> = ({
   handleGenderChange,
   handleSearchSubmit,
 }) => {
+  const handleEdit = async (id: string) => {
+    const response = await axios.get(
+      `http://localhost:4000/api/students/get-single-student/${id}`
+    );
+    console.log(response.data);
+  };
   return (
     <div className="rounded shadow-custom-shadow dark:bg-[#1f1f1f]">
       <div className="flex items-center justify-between border-b border-slate-300 p-5">
@@ -28,7 +35,7 @@ export const TableList: React.FC<TableListProps> = ({
         </Link>
       </div>
       <div className="p-5">
-        <div className="flex items-center justify-center lg:justify-start w-full mb-5">
+        <div className="flex items-center justify-center lg:justify-start 3xl:justify-center w-full mb-5">
           <form
             className="flex flex-col md:flex-row justify-between gap-3 items-center my-3 bg-slate-50  dark:bg-gray-700 rounded shadow-md p-3 w-[900px]"
             onSubmit={handleSearchSubmit}
@@ -85,37 +92,48 @@ export const TableList: React.FC<TableListProps> = ({
               </tr>
             </thead>
             <tbody>
-              {loading
-                ? "Loading..."
-                : students.length === 0
-                ? "No result found"
-                : students.map((item) => (
-                    <tr
-                      className="odd:bg-white even:bg-gray-50 border-b dark:bg-gray-800 dark:border-gray-700"
-                      key={item._id}
-                    >
-                      <td className="border p-2">{item.studentRoll}</td>
-                      <td className="border p-2">{item.email}</td>
-                      <td className="border p-2">{item.firstName}</td>
-                      <td className="border p-2">{item.middleName}</td>
-                      <td className="border p-2">{item.lastName}</td>
-                      <td className="border p-2">{item.gender}</td>
-                      <td className="border p-2">{item.dateOfBirth}</td>
-                      <td className="border p-2">{item.contact}</td>
-                      <td className="border p-2">{item.presentAddress}</td>
-                      <td className="border p-2">{item.permanentAddress}</td>
-                      <td className="border p-2">
-                        <div className="flex items-center gap-3">
-                          <button className="text-white p-2 rounded bg-blue-600">
+              {loading ? (
+                <tr>
+                  <td className="p-10">Loading...</td>
+                </tr>
+              ) : students.length === 0 ? (
+                <tr>
+                  <td className="p-10">No result found</td>
+                </tr>
+              ) : (
+                students.map((item) => (
+                  <tr
+                    className="odd:bg-white even:bg-gray-50 border-b dark:bg-gray-800 dark:border-gray-700"
+                    key={item._id}
+                  >
+                    <td className="border p-2">{item.studentRoll}</td>
+                    <td className="border p-2">{item.email}</td>
+                    <td className="border p-2">{item.firstName}</td>
+                    <td className="border p-2">{item.middleName}</td>
+                    <td className="border p-2">{item.lastName}</td>
+                    <td className="border p-2">{item.gender}</td>
+                    <td className="border p-2">{item.dateOfBirth}</td>
+                    <td className="border p-2">{item.contact}</td>
+                    <td className="border p-2">{item.presentAddress}</td>
+                    <td className="border p-2">{item.permanentAddress}</td>
+                    <td className="border p-2">
+                      <div className="flex items-center gap-3">
+                        <Link to="/add-student">
+                          <button
+                            className="text-white p-2 rounded bg-blue-600"
+                            onClick={() => handleEdit(item._id)}
+                          >
                             Edit
                           </button>
-                          <button className="text-white p-2 rounded bg-red-600">
-                            Delete
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
+                        </Link>
+                        <button className="text-white p-2 rounded bg-red-600">
+                          Delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

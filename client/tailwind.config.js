@@ -7,6 +7,9 @@ export default {
       fontFamily: {
         raleway: ["raleway", "sans-serif"],
       },
+      screens: {
+        "3xl": "1920px",
+      },
     },
   },
   plugins: [],
