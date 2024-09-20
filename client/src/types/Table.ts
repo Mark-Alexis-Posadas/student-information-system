@@ -4,6 +4,7 @@ import { ChangeEvent, SelectEvent, FormEvent } from "./Events";
 export interface TableListProps {
   tableHeadingData: StudentListTypes[];
   students: Student[];
+  loading: boolean;
   student: string;
   gender: string;
   handleStudentChange: (e: ChangeEvent) => void;
