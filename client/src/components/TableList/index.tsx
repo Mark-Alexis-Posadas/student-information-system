@@ -15,6 +15,7 @@ import {
 import axios from "axios";
 import { ViewModal } from "../Modal/ViewModal";
 import { useState } from "react";
+import { ConfirmationDelete } from "../Modal/ConfirmationDelete";
 
 export const TableList: React.FC<TableListProps> = ({
   loading,
@@ -24,6 +25,10 @@ export const TableList: React.FC<TableListProps> = ({
   handleStudentChange,
   handleGenderChange,
   handleSearchSubmit,
+  handleToggleDelete,
+  isToggleDelete,
+  setIsToggleDelete,
+  deleteId,
 }) => {
   const [view, setView] = useState([]);
   const [isToggleView, setIsToggleView] = useState(false);
@@ -39,6 +44,7 @@ export const TableList: React.FC<TableListProps> = ({
       console.log(error.message);
     }
   };
+
   return (
     <div className="rounded shadow-custom-shadow dark:bg-[#1f1f1f]">
       <div className="flex items-center justify-between border-b border-slate-300 p-5">
@@ -161,6 +167,7 @@ export const TableList: React.FC<TableListProps> = ({
                         <Button
                           classNames="flex items-center gap-2 text-white p-2 rounded bg-red-600"
                           type="button"
+                          handleButtonClick={() => handleToggleDelete(item._id)}
                         >
                           <FontAwesomeIcon icon={faTrash} />
                           Delete
@@ -179,6 +186,9 @@ export const TableList: React.FC<TableListProps> = ({
       </div>
       {isToggleView && (
         <ViewModal view={view} setIsToggleView={setIsToggleView} />
+      )}
+      {isToggleDelete && (
+        <ConfirmationDelete setIsToggleDelete={setIsToggleDelete} />
       )}
     </div>
   );

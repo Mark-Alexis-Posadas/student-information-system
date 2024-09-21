@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { ChangeEvent, OnSubmitEvent, SelectEvent } from "../../types/Events";
 import { TableList } from "../../components/TableList";
 import { studentListsData } from "../../data/student-list";
 import { Student } from "../../types/pages/student-list";
 import axios from "axios";
 
-export const StudentList: React.FC = () => {
+export const StudentList: FC = () => {
   const [students, setStudents] = useState<Student[]>([]);
   const [filteredStudents, setFilteredStudents] = useState<Student[]>([]);
 
   const [student, setStudent] = useState<string>("");
   const [gender, setGender] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [isToggleDelete, setIsToggleDelete] = useState<boolean>(false);
+  const [deleteId, setDeleteId] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchStudents = async () => {
@@ -35,6 +37,13 @@ export const StudentList: React.FC = () => {
   const handleGenderChange = (e: SelectEvent) => {
     setGender(e.target.value);
   };
+
+  const handleToggleDelete = (id: string) => {
+    setIsToggleDelete(true);
+    setDeleteId(id);
+  };
+
+  const handleProceedDelete = async () => {};
 
   const handleSearchSubmit = (e: OnSubmitEvent) => {
     e.preventDefault();
@@ -69,6 +78,10 @@ export const StudentList: React.FC = () => {
         handleStudentChange={handleStudentChange}
         handleGenderChange={handleGenderChange}
         handleSearchSubmit={handleSearchSubmit}
+        handleToggleDelete={handleToggleDelete}
+        isToggleDelete={isToggleDelete}
+        setIsToggleDelete={setIsToggleDelete}
+        deleteId={deleteId}
       />
     </div>
   );

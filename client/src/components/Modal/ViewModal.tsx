@@ -1,9 +1,10 @@
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FC } from "react";
+import { Student } from "../../types/pages/student-list";
 
 interface ViewTypes {
-  view: string[];
+  view: Student;
   name: string;
   setIsToggleView: (open: boolean) => void;
 }
