@@ -54,7 +54,8 @@ const deleteStudent = async (req, res) => {
   const { id } = req.params;
   try {
     const student = await Student.findByIdAndDelete(id);
-    res.json(student);
+    if (!student) return res.status(404).json({ message: "student not found" });
+    res.json({ message: "student deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: err.message });
   }

@@ -7,7 +7,6 @@ interface ToggleDelete {
 export const ConfirmationDelete: FC<ToggleDelete> = ({
   handleCancelDelete,
   handleProceedDelete,
-  deleteId,
 }) => {
   return (
     <div className="w-full h-full fixed top-0 left-0 flex items-center justify-center bg-[rgba(0,0,0,0.4)]">
@@ -22,7 +21,7 @@ export const ConfirmationDelete: FC<ToggleDelete> = ({
           </button>
           <button
             className="text-white p-2 rounded bg-blue-500"
-            onClick={() => handleProceedDelete(deleteId)}
+            onClick={handleProceedDelete}
           >
             proceed
           </button>

@@ -42,7 +42,7 @@ export const TableList: React.FC<TableListProps> = ({
       );
       console.log(response.data);
       setView(response.data);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error.message);
     }
   };

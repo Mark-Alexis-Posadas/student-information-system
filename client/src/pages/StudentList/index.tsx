@@ -8,11 +8,11 @@ import axios from "axios";
 export const StudentList: FC = () => {
   const [students, setStudents] = useState<Student[]>([]);
   const [filteredStudents, setFilteredStudents] = useState<Student[]>([]);
-
   const [student, setStudent] = useState<string>("");
   const [gender, setGender] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [isToggleDelete, setIsToggleDelete] = useState<boolean>(false);
+
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -39,6 +39,7 @@ export const StudentList: FC = () => {
   };
 
   const handleToggleDelete = (id: string) => {
+    console.log(id);
     setIsToggleDelete(true);
     setDeleteId(id);
   };
@@ -47,18 +48,19 @@ export const StudentList: FC = () => {
     setIsToggleDelete(false);
     setDeleteId(null);
   };
+
   const handleProceedDelete = async () => {
     try {
       await axios.delete(
         `http://localhost:4000/api/students/delete-student/${deleteId}`
       );
 
-      setStudents((preveStudents) =>
-        preveStudents.filter((student) => student._id !== deleteId)
+      setFilteredStudents((prevFiltered) =>
+        prevFiltered.filter((student) => student._id !== deleteId)
       );
       setDeleteId(null);
       setIsToggleDelete(false);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error.message);
     }
   };
