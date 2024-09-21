@@ -43,7 +43,25 @@ export const StudentList: FC = () => {
     setDeleteId(id);
   };
 
-  const handleProceedDelete = async () => {};
+  const handleCancelDelete = () => {
+    setIsToggleDelete(false);
+    setDeleteId(null);
+  };
+  const handleProceedDelete = async () => {
+    try {
+      await axios.delete(
+        `http://localhost:4000/api/students/delete-student/${deleteId}`
+      );
+
+      setStudents((preveStudents) =>
+        preveStudents.filter((student) => student._id !== deleteId)
+      );
+      setDeleteId(null);
+      setIsToggleDelete(false);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const handleSearchSubmit = (e: OnSubmitEvent) => {
     e.preventDefault();
@@ -79,6 +97,8 @@ export const StudentList: FC = () => {
         handleGenderChange={handleGenderChange}
         handleSearchSubmit={handleSearchSubmit}
         handleToggleDelete={handleToggleDelete}
+        handleCancelDelete={handleCancelDelete}
+        handleProceedDelete={handleProceedDelete}
         isToggleDelete={isToggleDelete}
         setIsToggleDelete={setIsToggleDelete}
         deleteId={deleteId}

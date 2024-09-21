@@ -26,12 +26,14 @@ export const TableList: React.FC<TableListProps> = ({
   handleGenderChange,
   handleSearchSubmit,
   handleToggleDelete,
+  handleCancelDelete,
+  handleProceedDelete,
   isToggleDelete,
-  setIsToggleDelete,
   deleteId,
 }) => {
   const [view, setView] = useState([]);
   const [isToggleView, setIsToggleView] = useState(false);
+
   const handleViewStudent = async (id: string) => {
     setIsToggleView(true);
     try {
@@ -188,7 +190,11 @@ export const TableList: React.FC<TableListProps> = ({
         <ViewModal view={view} setIsToggleView={setIsToggleView} />
       )}
       {isToggleDelete && (
-        <ConfirmationDelete setIsToggleDelete={setIsToggleDelete} />
+        <ConfirmationDelete
+          handleProceedDelete={handleProceedDelete}
+          handleCancelDelete={handleCancelDelete}
+          deleteId={deleteId}
+        />
       )}
     </div>
   );
