@@ -93,7 +93,7 @@ export const TableList: React.FC<TableListProps> = ({
                   className="dark:bg-gray-700 dark:text-white text-black"
                   value="Female"
                 >
-                  Fe male
+                  Female
                 </option>
                 <option
                   className="dark:bg-gray-700 dark:text-white text-black"

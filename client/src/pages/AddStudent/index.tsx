@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import moment from "moment";
 import { Button } from "../../components/Buttons";
 import { PageTitle } from "../../components/PageTitle";
 import { ChangeEvent, FormEvent } from "../../types/Events";
 import { FormValues } from "../../types/pages/add-student";
 import axios from "axios";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const intialFormValues = {
   studentRoll: "",
@@ -22,8 +21,7 @@ const intialFormValues = {
 
 export const AddStudent: React.FC = () => {
   const [formValues, setFormValues] = useState<FormValues>(intialFormValues);
-  // const [students, setStudents] = useState<string[]>([]);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleInputChange = (
     e:
@@ -32,12 +30,8 @@ export const AddStudent: React.FC = () => {
       | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     const { value, name } = e.target;
-    if (name === "dateOfBirth") {
-      const newDate = moment(new Date(e.target.value)).format("YYYY-MM-DD");
-      setFormValues(newDate);
-    } else {
-      setFormValues((prev) => ({ ...prev, [name]: value }));
-    }
+
+    setFormValues((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleFormSubmit = async (e: FormEvent) => {
@@ -59,9 +53,9 @@ export const AddStudent: React.FC = () => {
         "http://localhost:4000/api/students/create-student",
         studentData
       );
-      // navigate("/student-list");
+      navigate("/student-list");
       console.log(response.data);
-      // setStudents((prev) => [...prev, response.data]);
+      setFormValues(intialFormValues); //clear input fields after submit
     } catch (error: any) {
       console.log(error.message);
     }

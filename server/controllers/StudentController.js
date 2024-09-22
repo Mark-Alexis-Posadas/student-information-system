@@ -22,7 +22,7 @@ const createStudent = async (req, res) => {
     permanentAddress,
   } = req.body;
   try {
-    const student = Student.create({
+    const student = await Student.create({
       studentRoll,
       email,
       firstName,
