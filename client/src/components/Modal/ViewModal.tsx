@@ -9,12 +9,12 @@ interface ViewTypes {
 }
 export const ViewModal: FC<ViewTypes> = ({ view, setIsToggleView }) => {
   if (!view) {
-    return null; // or handle loading/error state if necessary
+    return null;
   }
 
   return (
     <div className="w-full h-full fixed top-0 left-0 flex items-center justify-center bg-[rgba(0,0,0,0.4)]">
-      <ul className="w-[900px] bg-white p-5 rounded flex flex-col">
+      <ul className="w-[900px] bg-white dark:bg-gray-700 p-5 rounded flex flex-col">
         <button
           className="bg-red-600 text-white rounded-full p-2 ml-auto w-10 h-10 flex items-center justify-center"
           onClick={() => setIsToggleView(false)}

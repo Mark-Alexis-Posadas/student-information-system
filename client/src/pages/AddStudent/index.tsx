@@ -34,6 +34,10 @@ export const AddStudent: React.FC = () => {
     setFormValues((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleCancel = () => {
+    setFormValues(intialFormValues);
+  };
+
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
@@ -169,6 +173,7 @@ export const AddStudent: React.FC = () => {
           <label className="capitalize text-sm">Present address</label>
           <textarea
             onChange={handleInputChange}
+            value={formValues.presentAddress}
             name="presentAddress"
             id="present_address"
             placeholder="present address"
@@ -179,6 +184,7 @@ export const AddStudent: React.FC = () => {
           <label className="capitalize text-sm">Permanent address</label>
           <textarea
             onChange={handleInputChange}
+            value={formValues.permanentAddress}
             name="permanentAddress"
             id="permanent_address"
             placeholder="permanent address"
@@ -189,7 +195,11 @@ export const AddStudent: React.FC = () => {
           <Button type="submit" classNames="text-white bg-blue-500 rounded p-2">
             Add Student
           </Button>
-          <Button type="button" classNames="text-white bg-gray-300 rounded p-2">
+          <Button
+            type="button"
+            classNames="text-white bg-gray-300 rounded p-2"
+            handleButtonClick={handleCancel}
+          >
             Cancel
           </Button>
         </div>
