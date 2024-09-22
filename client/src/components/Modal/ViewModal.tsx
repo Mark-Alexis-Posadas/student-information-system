@@ -4,11 +4,14 @@ import { FC } from "react";
 import { Student } from "../../types/pages/student-list";
 
 interface ViewTypes {
-  view: Student;
-  name: string;
+  view: Student | null;
   setIsToggleView: (open: boolean) => void;
 }
 export const ViewModal: FC<ViewTypes> = ({ view, setIsToggleView }) => {
+  if (!view) {
+    return null; // or handle loading/error state if necessary
+  }
+
   return (
     <div className="w-full h-full fixed top-0 left-0 flex items-center justify-center bg-[rgba(0,0,0,0.4)]">
       <ul className="w-[900px] bg-white p-5 rounded flex flex-col">

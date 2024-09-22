@@ -5,7 +5,7 @@ import { PageTitle } from "../../components/PageTitle";
 import { ChangeEvent, FormEvent } from "../../types/Events";
 import { FormValues } from "../../types/pages/add-student";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const intialFormValues = {
   studentRoll: "",
@@ -192,16 +192,12 @@ export const AddStudent: React.FC = () => {
           ></textarea>
         </div>
         <div className="flex items-center gap-4">
-          <Button
-            type="submit"
-            text="Add Student"
-            classNames="text-white bg-blue-500 rounded p-2"
-          />
-          <Button
-            type="button"
-            text="Cancel"
-            classNames="text-white bg-gray-300 rounded p-2"
-          />
+          <Button type="submit" classNames="text-white bg-blue-500 rounded p-2">
+            Add Student
+          </Button>
+          <Button type="button" classNames="text-white bg-gray-300 rounded p-2">
+            Cancel
+          </Button>
         </div>
       </form>
     </div>

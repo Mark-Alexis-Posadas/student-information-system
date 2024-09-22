@@ -16,6 +16,7 @@ import axios from "axios";
 import { ViewModal } from "../Modal/ViewModal";
 import { useState } from "react";
 import { ConfirmationDelete } from "../Modal/ConfirmationDelete";
+import { Student } from "../../types/pages/student-list";
 
 export const TableList: React.FC<TableListProps> = ({
   loading,
@@ -31,7 +32,8 @@ export const TableList: React.FC<TableListProps> = ({
   isToggleDelete,
   deleteId,
 }) => {
-  const [view, setView] = useState([]);
+  const [view, setView] = useState<Student | null>(null);
+
   const [isToggleView, setIsToggleView] = useState(false);
 
   const handleViewStudent = async (id: string) => {
@@ -40,7 +42,6 @@ export const TableList: React.FC<TableListProps> = ({
       const response = await axios.get(
         `http://localhost:4000/api/students/get-single-student/${id}`
       );
-      console.log(response.data);
       setView(response.data);
     } catch (error: any) {
       console.log(error.message);
@@ -49,7 +50,7 @@ export const TableList: React.FC<TableListProps> = ({
 
   return (
     <div className="rounded shadow-custom-shadow dark:bg-[#1f1f1f]">
-      <div className="flex items-center justify-between border-b border-slate-300 p-5">
+      <div className="flex items-center justify-between border-b border-slate-300 dark:border-gray-700 p-5">
         <h1 className="font-bold">List of students</h1>
         <Link to="/add-student">
           <Button
@@ -76,7 +77,7 @@ export const TableList: React.FC<TableListProps> = ({
                 id="show_entries"
                 placeholder="search by student"
                 name="showEntries"
-                className="w-full bg-transparent p-2"
+                className="w-full bg-transparent p-2 outline-none"
               />
             </div>
             <div className="flex items-center gap-3 w-full">
@@ -86,10 +87,20 @@ export const TableList: React.FC<TableListProps> = ({
                 id="gender"
                 value={gender}
                 onChange={handleGenderChange}
-                className="w-full bg-transparent p-2"
+                className="w-full bg-transparent p-2 outline-none"
               >
-                <option value="Female">Female</option>
-                <option value="Male">Male</option>
+                <option
+                  className="dark:bg-gray-700 dark:text-white text-black"
+                  value="Female"
+                >
+                  Fe male
+                </option>
+                <option
+                  className="dark:bg-gray-700 dark:text-white text-black"
+                  value="Male"
+                >
+                  Male
+                </option>
               </select>
             </div>
             <Button
@@ -135,17 +146,37 @@ export const TableList: React.FC<TableListProps> = ({
                     className="odd:bg-white even:bg-gray-50 border-b dark:bg-gray-800 dark:border-gray-700"
                     key={item._id}
                   >
-                    <td className="border p-2">{item.studentRoll}</td>
-                    <td className="border p-2">{item.email}</td>
-                    <td className="border p-2">{item.firstName}</td>
-                    <td className="border p-2">{item.middleName}</td>
-                    <td className="border p-2">{item.lastName}</td>
-                    <td className="border p-2">{item.gender}</td>
-                    <td className="border p-2">{item.dateOfBirth}</td>
-                    <td className="border p-2">{item.contact}</td>
-                    <td className="border p-2">{item.presentAddress}</td>
-                    <td className="border p-2">{item.permanentAddress}</td>
-                    <td className="border p-2">
+                    <td className="border dark:border-gray-700 p-2">
+                      {item.studentRoll}
+                    </td>
+                    <td className="border dark:border-gray-700 p-2">
+                      {item.email}
+                    </td>
+                    <td className="border dark:border-gray-700 p-2">
+                      {item.firstName}
+                    </td>
+                    <td className="border dark:border-gray-700 p-2">
+                      {item.middleName}
+                    </td>
+                    <td className="border dark:border-gray-700 p-2">
+                      {item.lastName}
+                    </td>
+                    <td className="border dark:border-gray-700 p-2">
+                      {item.gender}
+                    </td>
+                    <td className="border dark:border-gray-700 p-2">
+                      {item.dateOfBirth}
+                    </td>
+                    <td className="border dark:border-gray-700 p-2">
+                      {item.contact}
+                    </td>
+                    <td className="border dark:border-gray-700 p-2">
+                      {item.presentAddress}
+                    </td>
+                    <td className="border dark:border-gray-700 p-2">
+                      {item.permanentAddress}
+                    </td>
+                    <td className="border dark:border-gray-700 p-2">
                       <div className="flex items-center gap-3">
                         <Link to="/add-student">
                           <Button
@@ -182,10 +213,72 @@ export const TableList: React.FC<TableListProps> = ({
             </tbody>
           </table>
         </div>
+        <div className="mt-10 flex items-center justify-between">
+          <span>Show </span>
+          <nav aria-label="Page navigation example">
+            <ul className="inline-flex -space-x-px text-base h-10">
+              <li>
+                <a
+                  href="#"
+                  className="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                >
+                  Previous
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                >
+                  1
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                >
+                  2
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  aria-current="page"
+                  className="flex items-center justify-center px-4 h-10 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+                >
+                  3
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                >
+                  4
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                >
+                  5
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                >
+                  Next
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
-      <div className="flex items-center justify-betwee">
-        <span>Show </span>
-      </div>
+
       {isToggleView && (
         <ViewModal view={view} setIsToggleView={setIsToggleView} />
       )}

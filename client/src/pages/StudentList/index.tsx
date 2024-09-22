@@ -39,7 +39,6 @@ export const StudentList: FC = () => {
   };
 
   const handleToggleDelete = (id: string) => {
-    console.log(id);
     setIsToggleDelete(true);
     setDeleteId(id);
   };
