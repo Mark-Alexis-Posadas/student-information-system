@@ -8,7 +8,6 @@ export interface SignUpFieldsTypes {
   email: string;
   gender: string;
   password: string;
-  confirmPassword: string;
 }
 
 export interface SignUpState {
