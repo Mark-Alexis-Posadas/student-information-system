@@ -1,6 +1,5 @@
-import { FC, useEffect, useState } from "react";
 import axios from "axios";
-
+import { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faSearch, faVenus } from "@fortawesome/free-solid-svg-icons";
@@ -184,8 +183,8 @@ export const StudentList: FC = () => {
               handleToggleDelete={handleToggleDelete}
               handleViewStudent={handleViewStudent}
             />
-            <Pagination />
           </div>
+          <Pagination />
         </div>
 
         {isToggleView && (
