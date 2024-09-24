@@ -4,13 +4,14 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faSearch, faVenus } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "../../components/Buttons";
-import { TableList } from "../../components/TableList";
+
 import { studentListsData } from "../../data/student-list";
 import { Student } from "../../types/pages/student-list";
 import { ChangeEvent, OnSubmitEvent, SelectEvent } from "../../types/Events";
 import { ViewModal } from "../../components/Modal/ViewModal";
 import { ConfirmationDelete } from "../../components/Modal/ConfirmationDelete";
 import { Pagination } from "../../components/Pagination";
+import { StudentListTable } from "../../components/TableList/StudentList";
 
 export const StudentList: FC = () => {
   const [students, setStudents] = useState<Student[]>([]);
@@ -175,7 +176,7 @@ export const StudentList: FC = () => {
           </div>
 
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <TableList
+            <StudentListTable
               students={filteredStudents}
               loading={loading}
               setIsToggleView={setIsToggleView}

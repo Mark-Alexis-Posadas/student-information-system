@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import { Button } from "../Buttons";
 
-import { TableListProps } from "../../types/Table";
+import { StudentListTypes } from "../../types/StudentListTable";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faEye, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-export const TableList: React.FC<TableListProps> = ({
+export const StudentListTable: React.FC<StudentListTypes> = ({
   loading,
   students,
   handleViewStudent,

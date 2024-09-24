@@ -1,11 +1,10 @@
 import React from "react";
-import { TableList } from "../../components/TableList";
-import { departmentListsData } from "../../data/department-list";
+import { DepartmentListTable } from "../../components/TableList/DepartmentList";
 
 export const DepartmentList: React.FC = () => {
   return (
     <div>
-      <TableList tableHeadingData={departmentListsData} />
+      <DepartmentListTable />
     </div>
   );
 };
