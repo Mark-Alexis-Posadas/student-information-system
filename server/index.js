@@ -6,6 +6,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const app = express();
 const routes = require("./routes/route");
+const authRoute = require("./routes/authRoute");
 
 app.use(express.json());
 // Middleware
@@ -14,6 +15,8 @@ app.use(bodyParser.json());
 
 //routes
 app.use("/api/students", routes);
+
+app.use("/api/auth/", authRoute);
 
 //connect to db
 mongoose

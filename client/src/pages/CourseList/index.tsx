@@ -1,6 +1,5 @@
-import React from "react";
+import { FC } from "react";
 
-import { courseListsData } from "../../data/course-list";
-export const CourseList: React.FC = () => {
+export const CourseList: FC = () => {
   return <div>course</div>;
 };

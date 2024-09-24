@@ -21,12 +21,6 @@ const Sidebar: React.FC<SidebarTypes> = ({ isToggle }) => {
             </li>
             <h3 className="font-bold my-3 dark:text-white">Students</h3>
             <li className="my-2 text-sm text-gray-500">
-              <Link className="flex items-center gap-2" to="/add-student">
-                <FontAwesomeIcon icon={faPlus} />
-                New Student
-              </Link>
-            </li>
-            <li className="my-2 text-sm text-gray-500">
               <Link className="flex items-center gap-2" to="/student-list">
                 <FontAwesomeIcon icon={faUserGroup} />
                 Student List

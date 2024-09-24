@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 //pages
-import { AddStudent } from "./pages/AddStudent";
+
 import { StudentList } from "./pages/StudentList";
 import { DepartmentList } from "./pages/DepartmentList";
 import { CourseList } from "./pages/CourseList";
@@ -26,7 +26,6 @@ const App: React.FC = () => {
 
       <Route path="/" element={<DashboardLayout />}>
         <Route index element={<Dashboard />} />
-        <Route path="add-student" element={<AddStudent />} />
         <Route path="student-list" element={<StudentList />} />
         <Route path="department-list" element={<DepartmentList />} />
         <Route path="course-list" element={<CourseList />} />

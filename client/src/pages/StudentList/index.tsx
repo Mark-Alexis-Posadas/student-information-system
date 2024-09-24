@@ -1,6 +1,5 @@
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faSearch, faVenus } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "../../components/Buttons";
@@ -12,6 +11,7 @@ import { ViewModal } from "../../components/Modal/ViewModal";
 import { ConfirmationDelete } from "../../components/Modal/ConfirmationDelete";
 import { Pagination } from "../../components/Pagination";
 import { StudentListTable } from "../../components/TableList/StudentList";
+import { AddStudent } from "../../components/Modal/AddStudent";
 
 export const StudentList: FC = () => {
   const [students, setStudents] = useState<Student[]>([]);
@@ -24,6 +24,8 @@ export const StudentList: FC = () => {
   const [view, setView] = useState<Student | null>(null);
   //modals
   const [isToggleView, setIsToggleView] = useState<boolean>(false);
+  const [studentDetailsModal, setStudentDetailsModal] =
+    useState<boolean>(false);
 
   useEffect(() => {
     const fetchStudents = async () => {
@@ -113,15 +115,15 @@ export const StudentList: FC = () => {
       <div className="rounded shadow-custom-shadow dark:bg-[#1f1f1f]">
         <div className="flex items-center justify-between border-b border-slate-300 dark:border-gray-700 p-5">
           <h1 className="font-bold">List of students</h1>
-          <Link to="/add-student">
-            <Button
-              type="button"
-              classNames="flex items-center gap-2 text-white bg-blue-600 p-2 rounded"
-            >
-              <FontAwesomeIcon icon={faPlus} />
-              Add new student
-            </Button>
-          </Link>
+
+          <Button
+            type="button"
+            classNames="flex items-center gap-2 text-white bg-blue-600 p-2 rounded"
+            handleButtonClick={() => setStudentDetailsModal(true)}
+          >
+            <FontAwesomeIcon icon={faPlus} />
+            Add new student
+          </Button>
         </div>
         <div className="p-5">
           <div className="flex items-center justify-center lg:justify-start 3xl:justify-center w-full mb-5">
@@ -197,6 +199,9 @@ export const StudentList: FC = () => {
             handleCancelDelete={handleCancelDelete}
             deleteId={deleteId}
           />
+        )}
+        {studentDetailsModal && (
+          <AddStudent setStudentDetailsModal={setStudentDetailsModal} />
         )}
       </div>
     </div>
