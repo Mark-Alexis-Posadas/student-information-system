@@ -3,7 +3,6 @@ import { FC, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faSearch, faVenus } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "../../components/Buttons";
-
 import { studentListsData } from "../../data/student-list";
 import { Student } from "../../types/pages/student-list";
 import { ChangeEvent, OnSubmitEvent, SelectEvent } from "../../types/Events";
@@ -27,6 +26,11 @@ export const StudentList: FC = () => {
   const [studentDetailsModal, setStudentDetailsModal] =
     useState<boolean>(false);
 
+  const handleAddStudent = (newStudent: Student) => {
+    setStudents((prev) => [...prev, newStudent]);
+    setFilteredStudents((prev) => [...prev, newStudent]);
+  };
+
   useEffect(() => {
     const fetchStudents = async () => {
       try {
@@ -48,6 +52,7 @@ export const StudentList: FC = () => {
       const response = await axios.get(
         `http://localhost:4000/api/students/get-single-student/${id}`
       );
+
       setView(response.data);
     } catch (error: any) {
       console.log(error.message);
@@ -201,7 +206,10 @@ export const StudentList: FC = () => {
           />
         )}
         {studentDetailsModal && (
-          <AddStudent setStudentDetailsModal={setStudentDetailsModal} />
+          <AddStudent
+            setStudentDetailsModal={setStudentDetailsModal}
+            onAddStudent={handleAddStudent}
+          />
         )}
       </div>
     </div>

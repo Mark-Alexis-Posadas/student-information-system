@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import axios from "axios";
 import { Button } from "../../components/Buttons";
 import { PageTitle } from "../../components/PageTitle";
 import { ChangeEvent, FormEvent } from "../../types/Events";
 import { FormValues } from "../../types/pages/add-student";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Student } from "../../types/pages/student-list";
+
 interface Type {
   setStudentDetailsModal: (close: boolean) => void;
+  onAddStudent: (newStudent: Student) => void;
 }
 
 const intialFormValues = {
@@ -22,9 +24,11 @@ const intialFormValues = {
   permanentAddress: "",
 };
 
-export const AddStudent: React.FC<Type> = ({ setStudentDetailsModal }) => {
+export const AddStudent: React.FC<Type> = ({
+  setStudentDetailsModal,
+  onAddStudent,
+}) => {
   const [formValues, setFormValues] = useState<FormValues>(intialFormValues);
-  const navigate = useNavigate();
 
   const handleInputChange = (
     e:
@@ -57,8 +61,7 @@ export const AddStudent: React.FC<Type> = ({ setStudentDetailsModal }) => {
         "http://localhost:4000/api/students/create-student",
         studentData
       );
-      navigate("/student-list");
-      console.log(response.data);
+      onAddStudent(response.data);
       setFormValues(intialFormValues);
     } catch (error: any) {
       console.log(error.message);
