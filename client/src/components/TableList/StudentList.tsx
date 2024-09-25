@@ -9,6 +9,7 @@ import { faEdit, faEye, faTrash } from "@fortawesome/free-solid-svg-icons";
 export const StudentListTable: React.FC<StudentListTypes> = ({
   loading,
   students,
+  currentItems,
   handleViewStudent,
   handleToggleDelete,
 }) => {
@@ -39,7 +40,7 @@ export const StudentListTable: React.FC<StudentListTypes> = ({
             <td className="p-10">No result found</td>
           </tr>
         ) : (
-          students.map((item) => (
+          currentItems.map((item) => (
             <tr
               className="odd:bg-white even:bg-gray-50 border-b dark:bg-gray-800 dark:border-gray-700"
               key={item._id}

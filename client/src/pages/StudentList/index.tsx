@@ -26,6 +26,22 @@ export const StudentList: FC = () => {
   const [studentDetailsModal, setStudentDetailsModal] =
     useState<boolean>(false);
 
+  //pagination
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPage: number = 6;
+  const totalPages = Math.ceil(students.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = students.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handleNext = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+  const handlePrev = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
   const handleAddStudent = (newStudent: Student) => {
     setStudents((prev) => [...prev, newStudent]);
     setFilteredStudents((prev) => [...prev, newStudent]);
@@ -190,9 +206,17 @@ export const StudentList: FC = () => {
               tableHeadingData={studentListsData}
               handleToggleDelete={handleToggleDelete}
               handleViewStudent={handleViewStudent}
+              currentItems={currentItems}
             />
           </div>
-          <Pagination />
+          <Pagination
+            currentItems={currentItems}
+            handleNext={handleNext}
+            handlePrev={handlePrev}
+            totalPages={totalPages}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         </div>
 
         {isToggleView && (
