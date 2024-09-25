@@ -15,8 +15,8 @@ import { AddStudent } from "../../components/Modal/AddStudent";
 export const StudentList: FC = () => {
   const [students, setStudents] = useState<Student[]>([]);
   const [filteredStudents, setFilteredStudents] = useState<Student[]>([]);
-  const [student, setStudent] = useState<string>("");
-  const [gender, setGender] = useState<string>("");
+  const [searchByStudent, setSearchByStudent] = useState<string>("");
+  const [searchByGender, setSearchByGender] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [isToggleDelete, setIsToggleDelete] = useState<boolean>(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
@@ -32,7 +32,10 @@ export const StudentList: FC = () => {
   const totalPages = Math.ceil(students.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = students.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredStudents.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   const handleNext = () => {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
@@ -76,11 +79,11 @@ export const StudentList: FC = () => {
   };
 
   const handleStudentChange = (e: ChangeEvent) => {
-    setStudent(e.target.value);
+    setSearchByStudent(e.target.value);
   };
 
   const handleGenderChange = (e: SelectEvent) => {
-    setGender(e.target.value);
+    setSearchByGender(e.target.value);
   };
 
   const handleToggleDelete = (id: string) => {
@@ -111,7 +114,7 @@ export const StudentList: FC = () => {
 
   const handleSearchSubmit = (e: OnSubmitEvent) => {
     e.preventDefault();
-    if (!student) {
+    if (!searchByStudent) {
       alert("please fill out search filed");
       return;
     }
@@ -120,10 +123,14 @@ export const StudentList: FC = () => {
     setTimeout(() => {
       const filtered = students.filter((item) => {
         const matchesStudent =
-          item.firstName.toLowerCase().includes(student.toLowerCase()) ||
-          item.lastName.toLowerCase().includes(student.toLowerCase()) ||
-          item.email.toLowerCase().includes(student.toLowerCase());
-        const matchesGender = gender ? item.gender === gender : true;
+          item.firstName
+            .toLowerCase()
+            .includes(searchByStudent.toLowerCase()) ||
+          item.lastName.toLowerCase().includes(searchByStudent.toLowerCase()) ||
+          item.email.toLowerCase().includes(searchByStudent.toLowerCase());
+        const matchesGender = searchByGender
+          ? item.gender === searchByGender
+          : true;
         return matchesStudent && matchesGender;
       });
       setFilteredStudents(filtered);
@@ -156,7 +163,7 @@ export const StudentList: FC = () => {
                 <FontAwesomeIcon icon={faSearch} />
                 <input
                   type="text"
-                  value={student}
+                  value={searchByStudent}
                   onChange={handleStudentChange}
                   id="show_entries"
                   placeholder="search by student"
@@ -169,7 +176,7 @@ export const StudentList: FC = () => {
                 <select
                   name="gender"
                   id="gender"
-                  value={gender}
+                  value={searchByGender}
                   onChange={handleGenderChange}
                   className="w-full bg-transparent p-2 outline-none"
                 >

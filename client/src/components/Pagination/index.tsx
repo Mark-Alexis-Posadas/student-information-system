@@ -18,31 +18,37 @@ export const Pagination: FC<Type> = ({
   return (
     <div className="mt-10 flex items-center justify-between">
       <span>Show </span>
-      <button
-        onClick={handlePrev}
-        className="border border-slate-300 p-2 rounded mx-1 h-10 mt-10"
-        disabled={currentPage === 1}
-      >
-        Prev
-      </button>
-      {Array.from({ length: totalPages }, (_, index) => (
+      <div className="flex items-center gap-2">
         <button
-          key={index}
-          className={`border border-slate-300 p-2 rounded mx-1 w-10 h-10 mt-10 ${
-            currentPage === index + 1 ? "bg-blue-500 text-white" : ""
-          }`}
-          onClick={() => setCurrentPage(index + 1)}
+          onClick={handlePrev}
+          className={`${
+            currentPage === 1 && "bg-gray-300 cursor-not-allowed"
+          } border border-slate-300 dark:border-gray-700 p-2 rounded h-10 mt-10`}
+          disabled={currentPage === 1}
         >
-          {index + 1}
+          Prev
         </button>
-      ))}
-      <button
-        onClick={handleNext}
-        className="border border-slate-300 p-2 rounded mx-1 h-10 mt-10"
-        disabled={currentPage === totalPages}
-      >
-        Next
-      </button>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            className={`border border-slate-300 dark:border-gray-700 p-2 rounded w-10 h-10 mt-10 ${
+              currentPage === index + 1 ? "bg-blue-500 text-white" : ""
+            }`}
+            onClick={() => setCurrentPage(index + 1)}
+          >
+            {index + 1}
+          </button>
+        ))}
+        <button
+          onClick={handleNext}
+          className={`${
+            currentPage === totalPages && "bg-gray-300 cursor-not-allowed"
+          } border border-slate-300 dark:border-gray-700 p-2 rounded h-10 mt-10`}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };
