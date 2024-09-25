@@ -1,14 +1,7 @@
 import { FC } from "react";
+import { PaginationTypes } from "../../types/Pagination";
 
-interface Type {
-  // currentItems:
-  handleNext: () => void;
-  handlePrev: () => void;
-  // totalPages:
-  // currentPages:
-}
-
-export const Pagination: FC<Type> = ({
+export const Pagination: FC<PaginationTypes> = ({
   handleNext,
   handlePrev,
   totalPages,

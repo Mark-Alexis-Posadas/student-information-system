@@ -29,8 +29,8 @@ export const StudentList: FC = () => {
   //pagination
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage: number = 6;
-  const totalPages = Math.ceil(students.length / itemsPerPage);
-  const indexOfLastItem = currentPage * itemsPerPage;
+  const totalPages: number = Math.ceil(students.length / itemsPerPage);
+  const indexOfLastItem: number = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredStudents.slice(
     indexOfFirstItem,
@@ -217,7 +217,6 @@ export const StudentList: FC = () => {
             />
           </div>
           <Pagination
-            currentItems={currentItems}
             handleNext={handleNext}
             handlePrev={handlePrev}
             totalPages={totalPages}
