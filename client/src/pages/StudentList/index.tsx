@@ -27,6 +27,7 @@ export const StudentList: FC = () => {
     useState<boolean>(false);
 
   //pagination
+  const [isShowPagination, setIsShowPagination] = useState(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage: number = 6;
   const totalPages: number = Math.ceil(students.length / itemsPerPage);
@@ -135,6 +136,7 @@ export const StudentList: FC = () => {
       });
       setFilteredStudents(filtered);
       setLoading(false);
+      setIsShowPagination(false);
     }, 5000);
   };
 
@@ -216,13 +218,15 @@ export const StudentList: FC = () => {
               currentItems={currentItems}
             />
           </div>
-          <Pagination
-            handleNext={handleNext}
-            handlePrev={handlePrev}
-            totalPages={totalPages}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          />
+          {isShowPagination && (
+            <Pagination
+              handleNext={handleNext}
+              handlePrev={handlePrev}
+              totalPages={totalPages}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
+          )}
         </div>
 
         {isToggleView && (
