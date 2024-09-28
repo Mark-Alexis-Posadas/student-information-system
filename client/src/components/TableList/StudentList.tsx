@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { Button } from "../Buttons";
 
 import { StudentListTypes } from "../../types/StudentListTable";
@@ -8,10 +7,12 @@ import { faEdit, faEye, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export const StudentListTable: React.FC<StudentListTypes> = ({
   loading,
+  setIsEditing,
   students,
   currentItems,
   handleViewStudent,
   handleToggleDelete,
+  setStudentDetailsModal,
 }) => {
   return (
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
@@ -93,15 +94,16 @@ export const StudentListTable: React.FC<StudentListTypes> = ({
               </td>
               <td className="border dark:border-gray-700 p-2">
                 <div className="flex items-center gap-3">
-                  <Link to="/add-student">
-                    <Button
-                      classNames="flex items-center gap-2 text-white p-2 rounded bg-blue-600"
-                      type="button"
-                    >
-                      <FontAwesomeIcon icon={faEdit} />
-                      Edit
-                    </Button>
-                  </Link>
+                  <Button
+                    classNames="flex items-center gap-2 text-white p-2 rounded bg-blue-600"
+                    type="button"
+                    handleButtonClick={() => {
+                      setStudentDetailsModal(true), setIsEditing(true);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faEdit} />
+                    Edit
+                  </Button>
 
                   <Button
                     classNames="flex items-center gap-2 text-white p-2 rounded bg-gray-500"

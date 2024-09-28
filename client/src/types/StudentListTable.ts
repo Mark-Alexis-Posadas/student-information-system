@@ -7,6 +7,9 @@ export interface StudentListTypes {
   currentItems: Student[];
   loading: boolean;
   setIsToggleView: (open: boolean) => void;
+  setStudentDetailsModal: (open: boolean) => void;
   handleViewStudent: (id: string) => void;
   handleToggleDelete: (id: string) => void;
+
+  setIsEditing: (open: boolean) => void;
 }

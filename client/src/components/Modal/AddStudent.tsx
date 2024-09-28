@@ -9,6 +9,9 @@ import { Student } from "../../types/pages/student-list";
 interface Type {
   setStudentDetailsModal: (close: boolean) => void;
   onAddStudent: (newStudent: Student) => void;
+  isEditing: boolean;
+  setIsEditing: (close: boolean) => void;
+  setIsItem: (open: boolean) => void;
 }
 
 const intialFormValues = {
@@ -27,6 +30,9 @@ const intialFormValues = {
 export const AddStudent: React.FC<Type> = ({
   setStudentDetailsModal,
   onAddStudent,
+  isEditing,
+  setIsEditing,
+  setIsItem,
 }) => {
   const [formValues, setFormValues] = useState<FormValues>(intialFormValues);
 
@@ -63,6 +69,7 @@ export const AddStudent: React.FC<Type> = ({
       );
       onAddStudent(response.data);
       setFormValues(intialFormValues);
+      setIsItem(true);
     } catch (error: any) {
       console.log(error.message);
     }
@@ -71,7 +78,9 @@ export const AddStudent: React.FC<Type> = ({
   return (
     <div className="w-full h-full overflow-hidden fixed top-0 left-0 flex items-center justify-center bg-[rgba(0,0,0,0.4)]">
       <div className="p-5 shadow-custom-shadow rounded bg-white dark:bg-[#1f1f1f] w-[900px]">
-        <PageTitle text="Student Details" />
+        <PageTitle
+          text={isEditing ? "Edit Student Details" : "Student Details"}
+        />
         <form className="flex flex-wrap gap-3" onSubmit={handleFormSubmit}>
           <div className="flex flex-col w-[calc(50%-0.75rem)]">
             <label className="capitalize text-sm">Studet Roll</label>
@@ -200,12 +209,14 @@ export const AddStudent: React.FC<Type> = ({
               type="submit"
               classNames="text-white bg-blue-500 rounded p-2"
             >
-              Add Student
+              {isEditing ? "Update Student" : "Add Student"}
             </Button>
             <Button
               type="button"
               classNames="text-white bg-gray-300 rounded p-2"
-              handleButtonClick={() => setStudentDetailsModal(false)}
+              handleButtonClick={() => {
+                setStudentDetailsModal(false), setIsEditing(false);
+              }}
             >
               Cancel
             </Button>

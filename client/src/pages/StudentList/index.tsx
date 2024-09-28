@@ -11,6 +11,7 @@ import { ConfirmationDelete } from "../../components/Modal/ConfirmationDelete";
 import { Pagination } from "../../components/Pagination";
 import { StudentListTable } from "../../components/TableList/StudentList";
 import { AddStudent } from "../../components/Modal/AddStudent";
+import { Alert } from "../../components/Alert";
 
 export const StudentList: FC = () => {
   const [students, setStudents] = useState<Student[]>([]);
@@ -21,6 +22,8 @@ export const StudentList: FC = () => {
   const [isToggleDelete, setIsToggleDelete] = useState<boolean>(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [view, setView] = useState<Student | null>(null);
+  const [isItem, setIsItem] = useState<boolean>(false);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
   //modals
   const [isToggleView, setIsToggleView] = useState<boolean>(false);
   const [studentDetailsModal, setStudentDetailsModal] =
@@ -142,6 +145,10 @@ export const StudentList: FC = () => {
 
   return (
     <div>
+      {isItem && (
+        <Alert classNames="text-green-600 mb-5" text="delete this item" />
+      )}
+
       <div className="rounded shadow-custom-shadow dark:bg-[#1f1f1f]">
         <div className="flex items-center justify-between border-b border-slate-300 dark:border-gray-700 p-5">
           <h1 className="font-bold">List of students</h1>
@@ -209,6 +216,7 @@ export const StudentList: FC = () => {
 
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
             <StudentListTable
+              setStudentDetailsModal={setStudentDetailsModal}
               students={filteredStudents}
               loading={loading}
               setIsToggleView={setIsToggleView}
@@ -216,6 +224,7 @@ export const StudentList: FC = () => {
               handleToggleDelete={handleToggleDelete}
               handleViewStudent={handleViewStudent}
               currentItems={currentItems}
+              setIsEditing={setIsEditing}
             />
           </div>
           {isShowPagination && (
@@ -241,8 +250,11 @@ export const StudentList: FC = () => {
         )}
         {studentDetailsModal && (
           <AddStudent
+            isEditing={isEditing}
             setStudentDetailsModal={setStudentDetailsModal}
             onAddStudent={handleAddStudent}
+            setIsItem={setIsItem}
+            setIsEditing={setIsEditing}
           />
         )}
       </div>
