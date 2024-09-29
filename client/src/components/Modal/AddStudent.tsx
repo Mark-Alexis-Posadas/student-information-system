@@ -9,6 +9,7 @@ interface Type {
   handleFormSubmit: (arg0: FormEvent) => void;
   handleInputChange: (arg0: ChangeEvent) => void;
   formValues: Student[];
+  setDeleteId: null;
 }
 export const AddStudent: React.FC<Type> = ({
   setStudentDetailsModal,
@@ -17,6 +18,7 @@ export const AddStudent: React.FC<Type> = ({
   handleFormSubmit,
   handleInputChange,
   formValues,
+  setDeleteId,
 }) => {
   return (
     <div className="w-full h-full overflow-hidden fixed top-0 left-0 flex items-center justify-center bg-[rgba(0,0,0,0.4)]">
@@ -159,6 +161,7 @@ export const AddStudent: React.FC<Type> = ({
               classNames="text-white bg-gray-300 rounded p-2"
               handleButtonClick={() => {
                 setStudentDetailsModal(false), setIsEditing(false);
+                setDeleteId(null);
               }}
             >
               Cancel

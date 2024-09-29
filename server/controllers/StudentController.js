@@ -50,6 +50,47 @@ const getSingleStudent = async (req, res) => {
   }
 };
 
+const updateStudent = async (req, res) => {
+  const { id } = req.params;
+  const {
+    studentRoll,
+    email,
+    firstName,
+    middleName,
+    lastName,
+    gender,
+    dateOfBirth,
+    contact,
+    presentAddress,
+    permanentAddress,
+  } = req.body;
+  try {
+    const student = await Student.findByIdAndUpdate(
+      id,
+      {
+        studentRoll,
+        email,
+        firstName,
+        middleName,
+        lastName,
+        gender,
+        dateOfBirth,
+        contact,
+        presentAddress,
+        permanentAddress,
+      },
+      {
+        new: true,
+      }
+    );
+    if (!student) return res.status(404).json({ message: "Student not found" });
+    res.json(student);
+  } catch (err) {
+    console.log("Error updating student:", err.message);
+    res.status(500).json({ message: err.message });
+  }
+};
+
 const deleteStudent = async (req, res) => {
   const { id } = req.params;
   try {
@@ -65,5 +106,6 @@ module.exports = {
   getAllStudent,
   createStudent,
   getSingleStudent,
+  updateStudent,
   deleteStudent,
 };

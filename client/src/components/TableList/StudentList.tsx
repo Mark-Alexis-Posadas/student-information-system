@@ -7,12 +7,11 @@ import { faEdit, faEye, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export const StudentListTable: React.FC<StudentListTypes> = ({
   loading,
-  setIsEditing,
   students,
   currentItems,
   handleViewStudent,
   handleToggleDelete,
-  setStudentDetailsModal,
+  handleEditStudent,
 }) => {
   return (
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
@@ -97,9 +96,7 @@ export const StudentListTable: React.FC<StudentListTypes> = ({
                   <Button
                     classNames="flex items-center gap-2 text-white p-2 rounded bg-blue-600"
                     type="button"
-                    handleButtonClick={() => {
-                      setStudentDetailsModal(true), setIsEditing(true);
-                    }}
+                    handleButtonClick={() => handleEditStudent(item._id)}
                   >
                     <FontAwesomeIcon icon={faEdit} />
                     Edit

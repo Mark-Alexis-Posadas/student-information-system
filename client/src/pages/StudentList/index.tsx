@@ -43,6 +43,7 @@ export const StudentList: FC = () => {
   const [view, setView] = useState<Student | null>(null);
   const [isItem, setIsItem] = useState<boolean>(false);
   const [isEditing, setIsEditing] = useState<boolean>(false);
+
   //modals
   const [isToggleView, setIsToggleView] = useState<boolean>(false);
   const [studentDetailsModal, setStudentDetailsModal] =
@@ -77,6 +78,7 @@ export const StudentList: FC = () => {
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setStudentDetailsModal(false);
+
     try {
       const studentData = {
         studentRoll: formValues.studentRoll,
@@ -90,18 +92,30 @@ export const StudentList: FC = () => {
         presentAddress: formValues.presentAddress,
         permanentAddress: formValues.permanentAddress,
       };
-      const response = await axios.post(
-        "http://localhost:4000/api/students/create-student",
-        studentData
-      );
 
-      const handleAddStudent = (newStudent: Student) => {
-        setStudents((prev) => [...prev, newStudent]);
-        setFilteredStudents((prev) => [...prev, newStudent]);
-      };
-      handleAddStudent(response.data);
-      setFormValues(intialFormValues);
-      setIsItem(true);
+      if (isEditing) {
+        const response = await axios.put(
+          `http://localhost:4000/api/students/update-student/${deleteId}`,
+          studentData
+        );
+
+        setFilteredStudents((prevEmployees) =>
+          prevEmployees.map((emp) =>
+            emp._id === response.data._id ? response.data : emp
+          )
+        );
+      } else {
+        const response = await axios.post(
+          "http://localhost:4000/api/students/create-student",
+          studentData
+        );
+
+        // setStudents((prev) => [...prev, response.data]);
+        setFilteredStudents((prev) => [...prev, response.data]);
+
+        setFormValues(intialFormValues);
+        setIsItem(true);
+      }
     } catch (error: any) {
       console.log(error.message);
     }
@@ -151,6 +165,23 @@ export const StudentList: FC = () => {
     setSearchByGender(e.target.value);
   };
 
+  const handleEditStudent = async (id: string) => {
+    try {
+      setStudentDetailsModal(true);
+      setIsEditing(true);
+      setDeleteId(id);
+
+      // Fetch employee data for editing
+      const response = await axios.get(
+        `http://localhost:4000/api/students/get-single-student/${id}`
+      );
+
+      // Update input values with fetched data
+      setFormValues(response.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   const handleToggleDelete = (id: string) => {
     setIsToggleDelete(true);
     setDeleteId(id);
@@ -286,6 +317,7 @@ export const StudentList: FC = () => {
               handleViewStudent={handleViewStudent}
               currentItems={currentItems}
               setIsEditing={setIsEditing}
+              handleEditStudent={handleEditStudent}
             />
           </div>
           {isShowPagination && (
@@ -312,6 +344,7 @@ export const StudentList: FC = () => {
         {studentDetailsModal && (
           <AddStudent
             isEditing={isEditing}
+            setDeleteId={setDeleteId}
             setStudentDetailsModal={setStudentDetailsModal}
             setIsEditing={setIsEditing}
             handleFormSubmit={handleFormSubmit}

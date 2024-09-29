@@ -10,6 +10,6 @@ export interface StudentListTypes {
   setStudentDetailsModal: (open: boolean) => void;
   handleViewStudent: (id: string) => void;
   handleToggleDelete: (id: string) => void;
-
+  handleEditStudent: () => void;
   setIsEditing: (open: boolean) => void;
 }
