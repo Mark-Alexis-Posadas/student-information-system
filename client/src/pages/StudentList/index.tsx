@@ -5,13 +5,32 @@ import { faPlus, faSearch, faVenus } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "../../components/Buttons";
 import { studentListsData } from "../../data/student-list";
 import { Student } from "../../types/pages/student-list";
-import { ChangeEvent, OnSubmitEvent, SelectEvent } from "../../types/Events";
+import {
+  ChangeEvent,
+  FormEvent,
+  OnSubmitEvent,
+  SelectEvent,
+} from "../../types/Events";
 import { ViewModal } from "../../components/Modal/ViewModal";
 import { ConfirmationDelete } from "../../components/Modal/ConfirmationDelete";
 import { Pagination } from "../../components/Pagination";
 import { StudentListTable } from "../../components/TableList/StudentList";
 import { AddStudent } from "../../components/Modal/AddStudent";
 import { Alert } from "../../components/Alert";
+import { FormValues } from "../../types/pages/add-student";
+
+const intialFormValues = {
+  studentRoll: "",
+  email: "",
+  firstName: "",
+  middleName: "",
+  lastName: "",
+  gender: "",
+  dateOfBirth: "",
+  contact: "",
+  presentAddress: "",
+  permanentAddress: "",
+};
 
 export const StudentList: FC = () => {
   const [students, setStudents] = useState<Student[]>([]);
@@ -41,17 +60,59 @@ export const StudentList: FC = () => {
     indexOfLastItem
   );
 
+  //add student
+  const [formValues, setFormValues] = useState<FormValues>(intialFormValues);
+
+  const handleInputChange = (
+    e:
+      | ChangeEvent
+      | React.ChangeEvent<HTMLSelectElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const { value, name } = e.target;
+
+    setFormValues((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFormSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setStudentDetailsModal(false);
+    try {
+      const studentData = {
+        studentRoll: formValues.studentRoll,
+        email: formValues.email,
+        firstName: formValues.firstName,
+        middleName: formValues.middleName,
+        lastName: formValues.lastName,
+        gender: formValues.gender,
+        dateOfBirth: formValues.dateOfBirth,
+        contact: formValues.contact,
+        presentAddress: formValues.presentAddress,
+        permanentAddress: formValues.permanentAddress,
+      };
+      const response = await axios.post(
+        "http://localhost:4000/api/students/create-student",
+        studentData
+      );
+
+      const handleAddStudent = (newStudent: Student) => {
+        setStudents((prev) => [...prev, newStudent]);
+        setFilteredStudents((prev) => [...prev, newStudent]);
+      };
+      handleAddStudent(response.data);
+      setFormValues(intialFormValues);
+      setIsItem(true);
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
+
   const handleNext = () => {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
   };
 
   const handlePrev = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
-  };
-
-  const handleAddStudent = (newStudent: Student) => {
-    setStudents((prev) => [...prev, newStudent]);
-    setFilteredStudents((prev) => [...prev, newStudent]);
   };
 
   useEffect(() => {
@@ -252,9 +313,10 @@ export const StudentList: FC = () => {
           <AddStudent
             isEditing={isEditing}
             setStudentDetailsModal={setStudentDetailsModal}
-            onAddStudent={handleAddStudent}
-            setIsItem={setIsItem}
             setIsEditing={setIsEditing}
+            handleFormSubmit={handleFormSubmit}
+            handleInputChange={handleInputChange}
+            formValues={formValues}
           />
         )}
       </div>

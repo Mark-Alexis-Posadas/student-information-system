@@ -1,80 +1,23 @@
-import { useState } from "react";
-import axios from "axios";
 import { Button } from "../../components/Buttons";
 import { PageTitle } from "../../components/PageTitle";
 import { ChangeEvent, FormEvent } from "../../types/Events";
-import { FormValues } from "../../types/pages/add-student";
 import { Student } from "../../types/pages/student-list";
-
 interface Type {
   setStudentDetailsModal: (close: boolean) => void;
-  onAddStudent: (newStudent: Student) => void;
   isEditing: boolean;
   setIsEditing: (close: boolean) => void;
-  setIsItem: (open: boolean) => void;
+  handleFormSubmit: (arg0: FormEvent) => void;
+  handleInputChange: (arg0: ChangeEvent) => void;
+  formValues: Student[];
 }
-
-const intialFormValues = {
-  studentRoll: "",
-  email: "",
-  firstName: "",
-  middleName: "",
-  lastName: "",
-  gender: "",
-  dateOfBirth: "",
-  contact: "",
-  presentAddress: "",
-  permanentAddress: "",
-};
-
 export const AddStudent: React.FC<Type> = ({
   setStudentDetailsModal,
-  onAddStudent,
   isEditing,
   setIsEditing,
-  setIsItem,
+  handleFormSubmit,
+  handleInputChange,
+  formValues,
 }) => {
-  const [formValues, setFormValues] = useState<FormValues>(intialFormValues);
-
-  const handleInputChange = (
-    e:
-      | ChangeEvent
-      | React.ChangeEvent<HTMLSelectElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    const { value, name } = e.target;
-
-    setFormValues((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleFormSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    setStudentDetailsModal(false);
-    try {
-      const studentData = {
-        studentRoll: formValues.studentRoll,
-        email: formValues.email,
-        firstName: formValues.firstName,
-        middleName: formValues.middleName,
-        lastName: formValues.lastName,
-        gender: formValues.gender,
-        dateOfBirth: formValues.dateOfBirth,
-        contact: formValues.contact,
-        presentAddress: formValues.presentAddress,
-        permanentAddress: formValues.permanentAddress,
-      };
-      const response = await axios.post(
-        "http://localhost:4000/api/students/create-student",
-        studentData
-      );
-      onAddStudent(response.data);
-      setFormValues(intialFormValues);
-      setIsItem(true);
-    } catch (error: any) {
-      console.log(error.message);
-    }
-  };
-
   return (
     <div className="w-full h-full overflow-hidden fixed top-0 left-0 flex items-center justify-center bg-[rgba(0,0,0,0.4)]">
       <div className="p-5 shadow-custom-shadow rounded bg-white dark:bg-[#1f1f1f] w-[900px]">
