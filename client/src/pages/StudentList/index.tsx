@@ -179,7 +179,7 @@ export const StudentList: FC = () => {
       // Update input values with fetched data
       setFormValues(response.data);
     } catch (error) {
-      console.log(error.message);
+      console.log((error as Error).message);
     }
   };
   const handleToggleDelete = (id: string) => {

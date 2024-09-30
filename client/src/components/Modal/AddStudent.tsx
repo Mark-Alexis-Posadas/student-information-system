@@ -1,15 +1,22 @@
 import { Button } from "../../components/Buttons";
 import { PageTitle } from "../../components/PageTitle";
-import { ChangeEvent, FormEvent } from "../../types/Events";
-import { Student } from "../../types/pages/student-list";
+import {
+  ChangeEvent,
+  FormEvent,
+  TextAreaEvent,
+  SelectEvent,
+} from "../../types/Events";
+import { FormValues } from "../../types/pages/add-student";
+
 interface Type {
   setStudentDetailsModal: (close: boolean) => void;
   isEditing: boolean;
   setIsEditing: (close: boolean) => void;
   handleFormSubmit: (arg0: FormEvent) => void;
-  handleInputChange: (arg0: ChangeEvent) => void;
-  formValues: Student[];
-  setDeleteId: null;
+  handleInputChange: (arg0: ChangeEvent | TextAreaEvent | SelectEvent) => void;
+
+  formValues: FormValues;
+  setDeleteId: (arg0: null) => void;
 }
 export const AddStudent: React.FC<Type> = ({
   setStudentDetailsModal,
