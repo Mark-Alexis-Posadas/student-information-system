@@ -52,7 +52,7 @@ export const StudentList: FC = () => {
   //pagination
   const [isShowPagination, setIsShowPagination] = useState(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const itemsPerPage: number = 6;
+  const [itemsPerPage, setItemPerPage] = useState<number>(1);
   const totalPages: number = Math.ceil(students.length / itemsPerPage);
   const indexOfLastItem: number = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -60,6 +60,11 @@ export const StudentList: FC = () => {
     indexOfFirstItem,
     indexOfLastItem
   );
+
+  //handle show entries
+  const handleShowEntries = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setItemPerPage(parseInt(e.target.value));
+  };
 
   //add student
   const [formValues, setFormValues] = useState<FormValues>(intialFormValues);
@@ -255,7 +260,20 @@ export const StudentList: FC = () => {
           </Button>
         </div>
         <div className="p-5">
-          <div className="flex items-center justify-center lg:justify-start 3xl:justify-center w-full mb-5">
+          <div className="flex items-center justify-center lg:justify-start 3xl:justify-between w-full mb-5">
+            <div>
+              <select
+                name="entries"
+                id="show_entries"
+                className="w-[50px]"
+                onChange={handleShowEntries}
+              >
+                <option value={1}>1</option>
+                <option value={3}>3</option>
+                <option value={6}>6</option>
+              </select>
+              <label htmlFor="">entries per page</label>
+            </div>
             <form
               className="flex flex-col md:flex-row justify-between gap-3 items-center my-3 bg-slate-50  dark:bg-gray-700 rounded shadow-md p-3 w-[900px]"
               onSubmit={handleSearchSubmit}
@@ -322,6 +340,8 @@ export const StudentList: FC = () => {
           </div>
           {isShowPagination && (
             <Pagination
+              itemsPerPage={itemsPerPage}
+              students={filteredStudents}
               handleNext={handleNext}
               handlePrev={handlePrev}
               totalPages={totalPages}

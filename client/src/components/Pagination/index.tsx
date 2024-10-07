@@ -5,12 +5,16 @@ export const Pagination: FC<PaginationTypes> = ({
   handleNext,
   handlePrev,
   totalPages,
+  itemsPerPage,
+  students,
   currentPage,
   setCurrentPage,
 }) => {
   return (
     <div className="mt-10 flex items-center justify-between">
-      <span>Show </span>
+      <span>
+        Show 1 to {itemsPerPage} of {students.length} entries
+      </span>
       <div className="flex items-center gap-2">
         <button
           onClick={handlePrev}

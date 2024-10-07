@@ -4,4 +4,5 @@ export interface PaginationTypes {
   totalPages: number;
   currentPage: number;
   setCurrentPage: (arg0: number) => void;
+  itemsPerPage: number;
 }
