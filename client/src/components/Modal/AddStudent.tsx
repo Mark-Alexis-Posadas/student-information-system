@@ -44,7 +44,7 @@ export const AddStudent: React.FC<Type> = ({
               name="studentRoll"
               id="student_roll"
               placeholder="student roll"
-              className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
             />
           </div>
 
@@ -57,7 +57,7 @@ export const AddStudent: React.FC<Type> = ({
               name="email"
               id="email"
               placeholder="email"
-              className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
             />
           </div>
 
@@ -70,7 +70,7 @@ export const AddStudent: React.FC<Type> = ({
               name="firstName"
               id="first_name"
               placeholder="first name"
-              className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
             />
           </div>
           <div className="flex flex-col w-[calc(50%-0.75rem)]">
@@ -82,7 +82,7 @@ export const AddStudent: React.FC<Type> = ({
               name="middleName"
               id="middle_name"
               placeholder="middle name"
-              className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
             />
           </div>
           <div className="flex flex-col w-[calc(50%-0.75rem)]">
@@ -94,7 +94,7 @@ export const AddStudent: React.FC<Type> = ({
               name="lastName"
               id="last_name"
               placeholder="last name"
-              className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
             />
           </div>
           <div className="flex flex-col w-[calc(50%-0.75rem)]">
@@ -119,7 +119,7 @@ export const AddStudent: React.FC<Type> = ({
               name="dateOfBirth"
               id="date_of_birth"
               placeholder="date of birth"
-              className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
             />
           </div>
           <div className="flex flex-col w-[calc(50%-0.75rem)]">
@@ -131,7 +131,7 @@ export const AddStudent: React.FC<Type> = ({
               name="contact"
               id="contact"
               placeholder="contact"
-              className="border border-slate-300 p-2 rounded text-gray-500 dark:bg-gray-700 dark:border-none"
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
             />
           </div>
           <div className="flex flex-col w-[calc(50%-0.75rem)]">
@@ -159,7 +159,7 @@ export const AddStudent: React.FC<Type> = ({
           <div className="flex items-center gap-4">
             <Button
               type="submit"
-              classNames="text-white bg-blue-500 rounded p-2"
+              classNames="bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600 transition duration-200"
             >
               {isEditing ? "Update Student" : "Add Student"}
             </Button>

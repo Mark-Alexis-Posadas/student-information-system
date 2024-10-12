@@ -1,10 +1,8 @@
-import { StudentListTypes } from "../pages/student-list";
-export interface SignUpTypes extends StudentListTypes {}
+// import { StudentListTypes } from "../pages/student-list";
+// export interface SignUpTypes extends StudentListTypes {}
 
 export interface SignUpFieldsTypes {
-  firstName: string;
-  middleName: string;
-  lastName: string;
+  name: string;
   email: string;
   gender: string;
   password: string;
