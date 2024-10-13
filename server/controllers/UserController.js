@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const bcrypt = require("bcrypt");
 
 const getUsers = async (req, res) => {
   const users = await User.find({});
@@ -9,14 +10,16 @@ const register = async (req, res) => {
   const { email, name, gender, password } = req.body;
 
   try {
-    const newUser = await User.create({
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await User.create({
       email,
       name,
       gender,
-      password,
+      password: hashedPassword,
     });
 
-    res.status(201).json(newUser);
+    // res.status(201).json(newUser);
+    res.send({ message: "User registered successfully" });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ msg: "Server error" });
@@ -28,16 +31,18 @@ const login = async (req, res) => {
   try {
     const user = await User.findOne({ email: email });
     if (user) {
-      if (user.password === password) {
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (isMatch) {
         res.json("Success");
       } else {
-        res.json("The Password is incorrect");
+        res.json("The password is incorrect");
       }
     } else {
       res.json("No record existed");
     }
   } catch (error) {
-    res.json(error.message);
+    res.status(500).json("An error occurred");
   }
 };
+
 module.exports = { register, getUsers, login };

@@ -14,6 +14,7 @@ import { SignUp } from "./authentication/SignUp";
 import { Login } from "./authentication/Login";
 import DashboardLayout from "./DashboardLayout";
 import { Otp } from "./authentication/Otp";
+import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 
 const App: React.FC = () => {
   return (
@@ -23,14 +24,15 @@ const App: React.FC = () => {
         <Route path="/otp" element={<Otp />} />
         <Route path="/login" element={<Login />} />
       </Route>
-
-      <Route path="/" element={<DashboardLayout />}>
-        <Route index element={<Dashboard />} />
-        <Route path="student-list" element={<StudentList />} />
-        <Route path="department-list" element={<DepartmentList />} />
-        <Route path="course-list" element={<CourseList />} />
-        <Route path="user-list" element={<UserList />} />
-        <Route path="settings" element={<Settings />} />
+      <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
+        <Route path="/" element={<DashboardLayout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="student-list" element={<StudentList />} />
+          <Route path="department-list" element={<DepartmentList />} />
+          <Route path="course-list" element={<CourseList />} />
+          <Route path="user-list" element={<UserList />} />
+          <Route path="settings" element={<Settings />} />
+        </Route>
       </Route>
     </Routes>
   );

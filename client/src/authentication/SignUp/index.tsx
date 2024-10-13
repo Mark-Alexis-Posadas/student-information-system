@@ -32,10 +32,11 @@ export const SignUp: React.FC = () => {
         formValues
       );
       setMessage(response.data.message);
+      console.log(response.data.message);
     } catch (error) {
       console.log((error as Error).message);
+      setMessage("Error register user");
     }
-    setMessage("Error register user");
   };
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
@@ -96,6 +97,7 @@ export const SignUp: React.FC = () => {
               type="password"
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
               placeholder="Password"
+              autoComplete="on"
             />
           </div>
           <div className="flex flex-col mb-3">
@@ -109,6 +111,7 @@ export const SignUp: React.FC = () => {
               type="password"
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
               placeholder="Confirm Password"
+              autoComplete="on"
             />
           </div>
           <div className="flex items-center justify-between">
