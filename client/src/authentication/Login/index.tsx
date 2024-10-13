@@ -1,14 +1,31 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "../../components/Buttons";
 import { PageTitle } from "../../components/PageTitle";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { FormEvent } from "../../types/Events";
 
-export const Login: React.FC = () => {
+interface Types {
+  isLoggedIn: boolean;
+  setIsLoggedIn: (open: boolean) => void;
+}
+
+export const Login: React.FC<Types> = ({ isLoggedIn, setIsLoggedIn }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedIsLoggedIn = localStorage.getItem("isLoggedIn");
+    if (storedIsLoggedIn) {
+      setIsLoggedIn(JSON.parse(storedIsLoggedIn));
+    }
+  }, [setIsLoggedIn]);
+
+  // Update localStorage whenever isLoggedIn changes
+  useEffect(() => {
+    localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
+  }, [isLoggedIn]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -21,11 +38,11 @@ export const Login: React.FC = () => {
       console.log(response.data);
       if (response.data === "Success") {
         navigate("/");
+        setIsLoggedIn(true);
       } else {
-        navigate("/sign-up");
         alert("You are not registered to this service");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error.message);
     }
   };

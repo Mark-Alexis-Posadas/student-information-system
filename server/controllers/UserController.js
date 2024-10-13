@@ -17,11 +17,8 @@ const register = async (req, res) => {
       gender,
       password: hashedPassword,
     });
-
-    // res.status(201).json(newUser);
     res.send({ message: "User registered successfully" });
   } catch (error) {
-    console.error(error.message);
     res.status(500).json({ msg: "Server error" });
   }
 };

@@ -1,8 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-
 //pages
-
 import { StudentList } from "./pages/StudentList";
 import { DepartmentList } from "./pages/DepartmentList";
 import { CourseList } from "./pages/CourseList";
@@ -17,12 +15,21 @@ import { Otp } from "./authentication/Otp";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 
 const App: React.FC = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    const saved = localStorage.getItem("isLoggedIn");
+    return saved === "false";
+  });
   return (
     <Routes>
       <Route element={<AuthenticationLayout />}>
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/otp" element={<Otp />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={
+            <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          }
+        />
       </Route>
       <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
         <Route path="/" element={<DashboardLayout />}>
