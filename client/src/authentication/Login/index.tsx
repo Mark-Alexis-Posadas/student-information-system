@@ -4,6 +4,8 @@ import { PageTitle } from "../../components/PageTitle";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { FormEvent } from "../../types/Events";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 interface Types {
   isLoggedIn: boolean;
@@ -13,6 +15,7 @@ interface Types {
 export const Login: React.FC<Types> = ({ isLoggedIn, setIsLoggedIn }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [isTogglePassword, setIstogglePassword] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -66,7 +69,7 @@ export const Login: React.FC<Types> = ({ isLoggedIn, setIsLoggedIn }) => {
             />
           </div>
 
-          <div className="flex flex-col mb-3">
+          <div className="flex flex-col mb-3 relative">
             <label className="block text-gray-700" htmlFor="password">
               Password
             </label>
@@ -74,11 +77,18 @@ export const Login: React.FC<Types> = ({ isLoggedIn, setIsLoggedIn }) => {
               onChange={(e) => setPassword(e.target.value)}
               value={password}
               name="password"
-              type="password"
+              type={isTogglePassword ? "text" : "password"}
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
               placeholder="Password"
               autoComplete="on"
             />
+            <button
+              className="absolute top-9 right-4"
+              type="button"
+              onClick={() => setIstogglePassword(!isTogglePassword)}
+            >
+              <FontAwesomeIcon icon={isTogglePassword ? faEye : faEyeSlash} />
+            </button>
           </div>
 
           <div className="flex items-center justify-between">
