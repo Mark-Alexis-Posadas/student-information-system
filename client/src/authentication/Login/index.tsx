@@ -11,21 +11,43 @@ interface Types {
   isLoggedIn: boolean;
   setIsLoggedIn: (open: boolean) => void;
 }
+interface Errors {
+  email: string;
+  password: string;
+}
 
 export const Login: React.FC<Types> = ({ isLoggedIn, setIsLoggedIn }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isTogglePassword, setIstogglePassword] = useState(false);
+
+  const [errors, setErrors] = useState<Errors>({
+    email: "",
+    password: "",
+  });
+  const validateForm = () => {
+    let formErrors: Errors = { email: "", password: "" };
+    let isValid = true;
+
+    if (!email) {
+      isValid = false;
+      formErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      isValid = false;
+      formErrors.email = "Email address is invalid";
+    }
+
+    if (!password) {
+      isValid = false;
+      formErrors.password = "Password is required";
+    }
+
+    setErrors(formErrors);
+    return isValid;
+  };
+
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const storedIsLoggedIn = localStorage.getItem("isLoggedIn");
-    if (storedIsLoggedIn) {
-      setIsLoggedIn(JSON.parse(storedIsLoggedIn));
-    }
-  }, [setIsLoggedIn]);
-
-  // Update localStorage whenever isLoggedIn changes
   useEffect(() => {
     localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
   }, [isLoggedIn]);
@@ -34,6 +56,8 @@ export const Login: React.FC<Types> = ({ isLoggedIn, setIsLoggedIn }) => {
     e.preventDefault();
 
     try {
+      validateForm();
+
       const response = await axios.post(
         "http://localhost:4000/api/auth/login",
         { email, password }
@@ -42,8 +66,6 @@ export const Login: React.FC<Types> = ({ isLoggedIn, setIsLoggedIn }) => {
       if (response.data === "Success") {
         navigate("/");
         setIsLoggedIn(true);
-      } else {
-        alert("You are not registered to this service");
       }
     } catch (error: any) {
       console.log(error.message);
@@ -56,6 +78,10 @@ export const Login: React.FC<Types> = ({ isLoggedIn, setIsLoggedIn }) => {
 
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col mb-3">
+            {errors.email && (
+              <span className="text-red-500 text-sm">{errors.email}</span>
+            )}
+
             <label className="block text-gray-700" htmlFor="email">
               Email
             </label>
@@ -70,6 +96,10 @@ export const Login: React.FC<Types> = ({ isLoggedIn, setIsLoggedIn }) => {
           </div>
 
           <div className="flex flex-col mb-3 relative">
+            {errors.password && (
+              <span className="text-red-500 text-sm">{errors.password}</span>
+            )}
+
             <label className="block text-gray-700" htmlFor="password">
               Password
             </label>
@@ -87,7 +117,7 @@ export const Login: React.FC<Types> = ({ isLoggedIn, setIsLoggedIn }) => {
               type="button"
               onClick={() => setIstogglePassword(!isTogglePassword)}
             >
-              <FontAwesomeIcon icon={isTogglePassword ? faEye : faEyeSlash} />
+              <FontAwesomeIcon icon={isTogglePassword ? faEyeSlash : faEye} />
             </button>
           </div>
 

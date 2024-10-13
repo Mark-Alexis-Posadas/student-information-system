@@ -17,7 +17,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     const saved = localStorage.getItem("isLoggedIn");
-    return saved === "true";
+    return saved === "false";
   });
   return (
     <Routes>

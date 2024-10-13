@@ -52,7 +52,7 @@ export const StudentList: FC = () => {
   //pagination
   const [isShowPagination, setIsShowPagination] = useState(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage, setItemPerPage] = useState<number>(1);
+  const [itemsPerPage, setItemPerPage] = useState<number>(6);
   const totalPages: number = Math.ceil(students.length / itemsPerPage);
   const indexOfLastItem: number = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
