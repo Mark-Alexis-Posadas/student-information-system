@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,7 +11,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { NavbarTypes } from "../../types/Navbar";
-import { Link } from "react-router-dom";
 
 const Navbar: React.FC<NavbarTypes> = ({
   isToggle,
@@ -19,6 +19,16 @@ const Navbar: React.FC<NavbarTypes> = ({
   handleToggleTheme,
 }) => {
   const [isToggleLogout, setIsToggleLogout] = useState(false);
+
+  const logout = async () => {
+    try {
+      await axios.post("http://localhost:4000/api/auth/logout");
+
+      localStorage.removeItem("token");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
 
   return (
     <nav className="bg-white dark:bg-black p-3 px-4 montserrat border-b border-slate-300 dark:border-gray-600">
@@ -44,7 +54,7 @@ const Navbar: React.FC<NavbarTypes> = ({
           {isToggleLogout && (
             <ul>
               <li>
-                <Link to="/login">Logout</Link>
+                <button onClick={logout}>Logout</button>
               </li>
             </ul>
           )}

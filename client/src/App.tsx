@@ -5,7 +5,7 @@ import { StudentList } from "./pages/StudentList";
 import { DepartmentList } from "./pages/DepartmentList";
 import { CourseList } from "./pages/CourseList";
 import { UserList } from "./pages/UserList";
-import { Settings } from "./pages/Settings";
+// import { Settings } from "./pages/Settings";
 import { Dashboard } from "./pages/Dashboard";
 import AuthenticationLayout from "./AuthenticationLayout";
 import { SignUp } from "./authentication/SignUp";
@@ -38,7 +38,7 @@ const App: React.FC = () => {
           <Route path="department-list" element={<DepartmentList />} />
           <Route path="course-list" element={<CourseList />} />
           <Route path="user-list" element={<UserList />} />
-          <Route path="settings" element={<Settings />} />
+          {/* <Route path="settings" element={<Settings />} /> */}
         </Route>
       </Route>
     </Routes>
