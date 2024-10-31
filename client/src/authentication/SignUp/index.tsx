@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { Formik, Field } from "formik";
+import { Formik, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import { Button } from "../../components/Buttons";
 import { PageTitle } from "../../components/PageTitle";
-
+import { Error } from "../../components/Forms/Error";
 import { SignUpFieldsTypes } from "../../types/authentication/sign-up";
 import { Link } from "react-router-dom";
 import { Input } from "../../components/Forms/Input";
+import { Select } from "../../components/Forms/Select";
 
 const initialvalues: SignUpFieldsTypes = {
   name: "",
@@ -54,13 +55,16 @@ export const SignUp: React.FC = () => {
                 label="Name"
                 name="name"
                 type="text"
-                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
+                className={`${
+                  errors.name ? "border-red-500" : "border-gray-300 "
+                } w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-indigo-100`}
                 placeholder="Name"
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.name}
                 component={Input}
               />
+              <ErrorMessage name="name" component={Error} />
 
               <Field
                 label="Email"
@@ -69,27 +73,29 @@ export const SignUp: React.FC = () => {
                 value={values.email}
                 name="email"
                 type="email"
-                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
+                className={`${
+                  errors.email ? "border-red-500" : "border-gray-300 "
+                } w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-indigo-100`}
                 placeholder="Email"
                 component={Input}
               />
+              <ErrorMessage name="email" component={Error} />
 
-              <div className="flex flex-col mb-3">
-                <label className="block text-gray-700" htmlFor="gender">
-                  Gender
-                </label>
-                <select
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.gender}
-                  name="gender"
-                  id="gender"
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
-                >
-                  <option value="female">Female</option>
-                  <option value="male">Male</option>
-                </select>
-              </div>
+              <Field
+                label="Gender"
+                options={[
+                  { label: "Male", value: "male" },
+                  { label: "Female", value: "female" },
+                ]}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name="gender"
+                className={`${
+                  errors.gender ? "border-red-500" : "border-gray-300 "
+                } w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-indigo-100`}
+                component={Select}
+              />
+              <ErrorMessage name="gender" component={Error} />
 
               <Field
                 label="Password"
@@ -98,11 +104,14 @@ export const SignUp: React.FC = () => {
                 value={values.password}
                 name="password"
                 type="password"
-                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
+                className={`${
+                  errors.password ? "border-red-500" : "border-gray-300 "
+                } w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-indigo-100`}
                 placeholder="Password"
                 autoComplete="on"
                 component={Input}
               />
+              <ErrorMessage name="password" component={Error} />
 
               <Field
                 label="Confirm Password"
@@ -111,11 +120,14 @@ export const SignUp: React.FC = () => {
                 value={values.confirmPassword}
                 name="confirmPassword"
                 type="password"
-                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
+                className={`${
+                  errors.confirmPassword ? "border-red-500" : "border-gray-300 "
+                } w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-indigo-100`}
                 placeholder="Confirm Password"
                 autoComplete="on"
                 component={Input}
               />
+              <ErrorMessage name="confirmPassword" component={Error} />
 
               <div className="flex items-center justify-between">
                 <Button
