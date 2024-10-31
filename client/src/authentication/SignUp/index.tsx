@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Formik } from "formik";
+import { Formik, Field } from "formik";
 import axios from "axios";
 import { Button } from "../../components/Buttons";
 import { PageTitle } from "../../components/PageTitle";
-import { FormEvent } from "../../types/Events";
+
 import { SignUpFieldsTypes } from "../../types/authentication/sign-up";
 import { Link } from "react-router-dom";
+import { Input } from "../../components/Forms/Input";
 
 const initialvalues: SignUpFieldsTypes = {
   name: "",
@@ -17,9 +18,6 @@ const initialvalues: SignUpFieldsTypes = {
 export const SignUp: React.FC = () => {
   const [message, setMessage] = useState<string>("");
 
-  const handleFormSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-  };
   return (
     <Formik
       initialValues={initialvalues}
@@ -52,35 +50,30 @@ export const SignUp: React.FC = () => {
             <PageTitle text="Create your account" />
 
             <form onSubmit={handleSubmit}>
-              <div className="flex flex-col mb-3">
-                <label className="block text-gray-700" htmlFor="firstName">
-                  Name
-                </label>
-                <input
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.name}
-                  name="name"
-                  type="text"
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
-                  placeholder="Name"
-                />
-              </div>
+              <Field
+                label="Name"
+                name="name"
+                type="text"
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
+                placeholder="Name"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.name}
+                component={Input}
+              />
 
-              <div className="flex flex-col mb-3">
-                <label className="block text-gray-700" htmlFor="email">
-                  Email
-                </label>
-                <input
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.email}
-                  name="email"
-                  type="email"
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
-                  placeholder="Email"
-                />
-              </div>
+              <Field
+                label="Email"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+                name="email"
+                type="email"
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
+                placeholder="Email"
+                component={Input}
+              />
+
               <div className="flex flex-col mb-3">
                 <label className="block text-gray-700" htmlFor="gender">
                   Gender
@@ -97,42 +90,38 @@ export const SignUp: React.FC = () => {
                   <option value="male">Male</option>
                 </select>
               </div>
-              <div className="flex flex-col mb-3">
-                <label className="block text-gray-700" htmlFor="password">
-                  Password
-                </label>
-                <input
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.password}
-                  name="password"
-                  type="password"
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
-                  placeholder="Password"
-                  autoComplete="on"
-                />
-              </div>
-              <div className="flex flex-col mb-3">
-                <label className="block text-gray-700" htmlFor="password">
-                  Confirm Password
-                </label>
-                <input
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.confirmPassword}
-                  name="confirmPassword"
-                  type="password"
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
-                  placeholder="Confirm Password"
-                  autoComplete="on"
-                />
-              </div>
+
+              <Field
+                label="Password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+                name="password"
+                type="password"
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
+                placeholder="Password"
+                autoComplete="on"
+                component={Input}
+              />
+
+              <Field
+                label="Confirm Password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.confirmPassword}
+                name="confirmPassword"
+                type="password"
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
+                placeholder="Confirm Password"
+                autoComplete="on"
+                component={Input}
+              />
+
               <div className="flex items-center justify-between">
                 <Button
                   disabled={isSubmitting}
                   type="submit"
                   classNames="bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600 transition duration-200"
-                  handleButtonClick={handleFormSubmit}
                 >
                   Submit
                 </Button>

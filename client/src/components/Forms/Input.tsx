@@ -12,7 +12,7 @@ export const Input: FC<InputProps> = ({ field, form, label, ...props }) => {
       <label className="block text-gray-700" htmlFor="firstName">
         {label}
       </label>
-      <input {...field} {...props} />;
+      <input {...field} {...props} />
     </div>
   );
 };
