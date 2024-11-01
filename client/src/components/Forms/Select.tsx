@@ -15,6 +15,7 @@ export const Select: FC<SelectProps> = ({
   label,
   options,
   field,
+  form,
   ...props
 }) => {
   return (
