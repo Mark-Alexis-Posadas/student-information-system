@@ -9,11 +9,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { FormEvent } from "../../types/Events";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { Error } from "../../components/Forms/Error";
+import { Input } from "../../components/Forms/Input";
 
 interface Types {
   isLoggedIn: boolean;
   setIsLoggedIn: (open: boolean) => void;
 }
+
+const Schema = Yup.object({
+  email: Yup.string().required("Email is required"),
+  password: Yup.string().required("Password required"),
+});
 
 export const Login: React.FC<Types> = ({ isLoggedIn, setIsLoggedIn }) => {
   const [isTogglePassword, setIstogglePassword] = useState(false);
@@ -24,13 +31,10 @@ export const Login: React.FC<Types> = ({ isLoggedIn, setIsLoggedIn }) => {
     localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
   }, [isLoggedIn]);
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-  };
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
-      validationSchema={}
+      validationSchema={Schema}
       onSubmit={async (values, { setSubmitting }) => {
         try {
           const response = await axios.post(
@@ -45,72 +49,80 @@ export const Login: React.FC<Types> = ({ isLoggedIn, setIsLoggedIn }) => {
           }
         } catch (error: any) {
           console.log(error.message);
+        } finally {
+          setSubmitting(false);
         }
       }}
     >
-      <div className="min-h-screen flex flex-col items-center justify-center">
-        <div className="p-5 rounded shadow-custom-shadow w-full max-w-sm">
-          <PageTitle text="Sign IN" />
+      {({
+        values,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        isSubmitting,
+        errors,
+      }) => (
+        <div className="min-h-screen flex flex-col items-center justify-center">
+          <div className="p-5 rounded shadow-custom-shadow w-full max-w-sm">
+            <PageTitle text="Sign IN" />
 
-          <form onSubmit={handleSubmit}>
-            <div className="flex flex-col mb-3">
-              {errors.email && (
-                <span className="text-red-500 text-sm">{errors.email}</span>
-              )}
+            <form onSubmit={handleSubmit}>
+              <div className="flex flex-col mb-3">
+                <ErrorMessage name="email" component={Error} />
+                <Field
+                  type="text"
+                  name="email"
+                  label="Email"
+                  placeholder="Email"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                  component={Input}
+                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
+                />
+              </div>
 
-              <label className="block text-gray-700" htmlFor="email">
-                Email
-              </label>
-              <input
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                name="email"
-                type="email"
-                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
-                placeholder="Email"
-              />
-            </div>
+              <div className="flex flex-col mb-3 relative">
+                <ErrorMessage name="password" component={Error} />
+                <Field
+                  type="password"
+                  name="password"
+                  label="Password"
+                  placeholder="Email"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.password}
+                  component={Input}
+                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
+                />
 
-            <div className="flex flex-col mb-3 relative">
-              {errors.password && (
-                <span className="text-red-500 text-sm">{errors.password}</span>
-              )}
+                <button
+                  className="absolute top-9 right-4"
+                  type="button"
+                  onClick={() => setIstogglePassword(!isTogglePassword)}
+                >
+                  <FontAwesomeIcon
+                    icon={isTogglePassword ? faEyeSlash : faEye}
+                  />
+                </button>
+              </div>
 
-              <label className="block text-gray-700" htmlFor="password">
-                Password
-              </label>
-              <input
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                name="password"
-                type={isTogglePassword ? "text" : "password"}
-                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
-                placeholder="Password"
-                autoComplete="on"
-              />
-              <button
-                className="absolute top-9 right-4"
-                type="button"
-                onClick={() => setIstogglePassword(!isTogglePassword)}
-              >
-                <FontAwesomeIcon icon={isTogglePassword ? faEyeSlash : faEye} />
-              </button>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <Button
-                type="submit"
-                classNames="bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600 transition duration-200"
-              >
-                Login
-              </Button>
-              <Link className="text-sm" to="/sign-up">
-                Create Account
-              </Link>
-            </div>
-          </form>
+              <div className="flex items-center justify-between">
+                <Button
+                  disabled={isSubmitting}
+                  type="submit"
+                  classNames="bg-indigo-500 text-white p-2 rounded hover:bg-indigo-600 transition duration-200"
+                >
+                  Login
+                </Button>
+                <Link className="text-sm" to="/sign-up">
+                  Create Account
+                </Link>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
+      )}
     </Formik>
   );
 };
