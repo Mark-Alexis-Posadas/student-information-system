@@ -94,14 +94,14 @@ export const Login: React.FC<Types> = ({ isLoggedIn, setIsLoggedIn }) => {
                   type={isTogglePassword ? "text" : "password"}
                   name="password"
                   label="Password"
-                  placeholder="Email"
+                  placeholder="Password"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.password}
                   component={Input}
                   className={`${
-                    errors.password ? "border-red-500" : "border-gray-300 "
-                  }  w-full px-3 py-2 borderrounded focus:outline-none focus:ring focus:ring-indigo-100`}
+                    errors.password ? "border-red-500" : "border-gray-300"
+                  } w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-indigo-100`}
                 />
 
                 <button
