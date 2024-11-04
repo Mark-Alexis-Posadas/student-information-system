@@ -6,7 +6,7 @@ import { Button } from "../../components/Buttons";
 import { PageTitle } from "../../components/PageTitle";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { FormEvent } from "../../types/Events";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Error } from "../../components/Forms/Error";
@@ -18,8 +18,12 @@ interface Types {
 }
 
 const Schema = Yup.object({
-  email: Yup.string().required("Email is required"),
-  password: Yup.string().required("Password required"),
+  email: Yup.string()
+    .required("Email is required")
+    .email("Invalid email format"),
+  password: Yup.string()
+    .required("Password required")
+    .min(8, "Password must be at least 8 characters"),
 });
 
 export const Login: React.FC<Types> = ({ isLoggedIn, setIsLoggedIn }) => {
@@ -78,14 +82,16 @@ export const Login: React.FC<Types> = ({ isLoggedIn, setIsLoggedIn }) => {
                   onBlur={handleBlur}
                   value={values.email}
                   component={Input}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
+                  className={`${
+                    errors.email ? "border-red-500" : "border-gray-300 "
+                  } w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:ring-indigo-100`}
                 />
               </div>
 
               <div className="flex flex-col mb-3 relative">
                 <ErrorMessage name="password" component={Error} />
                 <Field
-                  type="password"
+                  type={isTogglePassword ? "text" : "password"}
                   name="password"
                   label="Password"
                   placeholder="Email"
@@ -93,7 +99,9 @@ export const Login: React.FC<Types> = ({ isLoggedIn, setIsLoggedIn }) => {
                   onBlur={handleBlur}
                   value={values.password}
                   component={Input}
-                  className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-indigo-100"
+                  className={`${
+                    errors.password ? "border-red-500" : "border-gray-300 "
+                  }  w-full px-3 py-2 borderrounded focus:outline-none focus:ring focus:ring-indigo-100`}
                 />
 
                 <button
