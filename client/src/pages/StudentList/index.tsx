@@ -261,16 +261,22 @@ export const StudentList: FC = () => {
         </div>
         <div className="p-5">
           <div className="flex items-center justify-center lg:justify-start 3xl:justify-between w-full mb-5">
-            <div>
+            <div className="flex flex-col md:flex-row justify-between gap-3 items-center my-3 bg-slate-50  dark:bg-gray-700 rounded shadow-md p-3">
               <select
                 name="entries"
                 id="show_entries"
-                className="w-[50px]"
+                className="w-[100px] dark:bg-gray-700 "
                 onChange={handleShowEntries}
               >
-                <option value={1}>1</option>
-                <option value={3}>3</option>
-                <option value={6}>6</option>
+                <option className="dark:bg-gray-700" value={1}>
+                  1
+                </option>
+                <option className="dark:bg-gray-700" value={3}>
+                  3
+                </option>
+                <option className="dark:bg-gray-700" value={6}>
+                  6
+                </option>
               </select>
               <label htmlFor="">entries per page</label>
             </div>
